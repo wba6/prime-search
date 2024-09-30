@@ -1,28 +1,16 @@
 ---
 geometry:
-
   - top=1in
-
-  - bottom=1in
-
+  - bottom=1i
   - left=1in
-
   - right=1in
-
 fontsize: 2pt  # Adjusted to a more standard size
-
 header-includes:
-
   - \usepackage{sectsty}
-
   - \allsectionsfont{\centering}
-
   - \usepackage{fancyhdr}
-
   - \usepackage{etoolbox}  # Needed for patching commands
-
   - \AtBeginDocument{\begin{center}}  # Starts centering at the beginning
-
   - \AtEndDocument{\end{center}}      # Ends centering at the end
 ---
 
