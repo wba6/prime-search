@@ -9,7 +9,10 @@ header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
-  - \allsectionsfont{\centering}  \titleformat*{\section}{\centering\Large\bfseries} \titleformat*{\subsection}{\centering\large\bfseries}
+  - \allsectionsfont{\centering}
+  -	\titleformat*{\section}{\centering\Large\bfseries}
+  -	\titleformat*{\subsection}{\centering\large\bfseries}
+  
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
