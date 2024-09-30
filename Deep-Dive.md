@@ -9,9 +9,6 @@ header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
-  - \usepackage{etoolbox}
-  - \AtBeginDocument{\begin{center}}
-  - \AtEndDocument{\end{center}}
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
