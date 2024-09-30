@@ -1,0 +1,30 @@
+name: Convert Markdown to PDF
+
+on:
+  push:
+    paths:
+      - 'Deep-Dive.md'
+      - '.github/workflows/convert-markdown-to-pdf.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive texlive-xetex texlive-latex-extra
+
+      - name: Convert Markdown to PDF
+        run: |
+          pandoc Deep-Dive.md -o Deep-Dive.pdf
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Deep-Dive-PDF
+          path: Deep-Dive.pdf
