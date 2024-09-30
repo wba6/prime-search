@@ -1,6 +1,7 @@
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
 ** Note we may not want a table of contents when we generate the final pdf**
+
 ## Table of Contents
 1. [Abstract](#abstract)
 2. [Introduction](#introduction)
@@ -23,6 +24,7 @@
 *Introduce the topic of prime number algorithms, the importance of efficiency in computational number theory, and an overview of what the paper will cover.*
 
 Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$. 
+
 ## History of the Sieve of Eratosthenes
 *Discuss the origins of the Sieve of Eratosthenes, its historical significance, and its foundational role in the study of prime numbers.*
 
