@@ -50,7 +50,7 @@ for file in "$@"; do
     # Create a temporary file for processing
     tmpfile=$(mktemp)
 
-    # Process the file with awk and sed
+    # Process the file with awk to handle headings and spacing
     awk '
     BEGIN {
         in_yaml = 0      # Flag to indicate if inside YAML front matter
@@ -100,8 +100,8 @@ for file in "$@"; do
     }
     ' "$file" | sed -e 's/[ \t]*$//' > "$tmpfile"
 
-    # Further processing with sed to fix list indentation
-    # Convert list items to consistent indentation (e.g., 2 spaces)
+    # Further processing with sed to fix list indentation and remove trailing spaces
+    # Convert unordered list items to consistent indentation (e.g., 2 spaces)
     sed -i '/^[*+-] /s/^[*+-] */  - /' "$tmpfile"
 
     # Ensure there is a blank line between paragraphs

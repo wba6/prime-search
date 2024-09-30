@@ -1,16 +1,28 @@
 ---
 geometry:
+
   - top=1in
+
   - bottom=1in
+
   - left=1in
+
   - right=1in
+
 fontsize: 6pt  # Adjusted to a more standard size
+
 header-includes:
+
   - \usepackage{sectsty}
+
   - \allsectionsfont{\centering}
+
   - \usepackage{fancyhdr}
+
   - \usepackage{etoolbox}  # Needed for patching commands
+
   - \AtBeginDocument{\begin{center}}  # Starts centering at the beginning
+
   - \AtEndDocument{\end{center}}      # Ends centering at the end
 ---
 
@@ -21,26 +33,36 @@ header-includes:
 ## Table of Contents
 
 1. [Abstract](#abstract)
+
 2. [Introduction](#introduction)
+
 3. [History of the Sieve of Eratosthenes](#history-of-the-sieve-of-eratosthenes)
+
 4. [Efficiency of the Sieve of Eratosthenes](#efficiency-of-the-sieve-of-eratosthenes)
+
 5. [Other Prime-Finding Algorithms](#other-prime-finding-algorithms)
+
     1. [Algorithm 1](#Algorithm 1)
+
     2. [Algorithm 2](#Algorithm 2)
+
     3. [Algorithm 3](#Algorithm 3)
+
 6. [Comparative Analysis](#comparative-analysis)
+
 7. [Conclusion](#conclusion)
+
 8. [References](#references)
 
 ---
 
 ## Abstract
-*Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.* 
+*Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.*
 
 ## Introduction
 *Introduce the topic of prime number algorithms, the importance of efficiency in computational number theory, and an overview of what the paper will cover.*
 
-Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$. 
+Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
 
 ## History of the Sieve of Eratosthenes
 *Discuss the origins of the Sieve of Eratosthenes, its historical significance, and its foundational role in the study of prime numbers.*
