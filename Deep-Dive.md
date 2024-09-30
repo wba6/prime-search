@@ -19,6 +19,7 @@ header-includes:
 ** Note we may not want a table of contents when we generate the final pdf**
 
 ## Table of Contents
+
 1. [Abstract](#abstract)
 2. [Introduction](#introduction)
 3. [History of the Sieve of Eratosthenes](#history-of-the-sieve-of-eratosthenes)
