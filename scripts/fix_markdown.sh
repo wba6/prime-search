@@ -50,75 +50,63 @@ for file in "$@"; do
     # Create a temporary file for processing
     tmpfile=$(mktemp)
 
-    # Process the file with awk to handle headings and spacing
-    awk '
-    BEGIN {
-        in_yaml = 0      # Flag to indicate if inside YAML front matter
-        need_blank_after = 0  # Flag to indicate if a blank line is needed after a heading
-        prev_blank = 1    # Flag to track if the previous line was blank
-    }
-    /^---$/ {
-        if (in_yaml == 0) {
-            in_yaml = 1
-        } else {
-            in_yaml = 0
-        }
-        print $0
-        next
-    }
-    {
-        if (in_yaml) {
-            print $0
-            next
-        }
+    # Initialize YAML front matter flags
+    in_yaml=0
 
-        if ($0 ~ /^#{1,6} /) {  # Match headings (from # to ######)
-            if (prev_blank == 0) {
-                print ""  # Insert a blank line before the heading
-            }
-            print $0
-            need_blank_after = 1  # Set flag to insert blank line after heading
-            prev_blank = 0
-            next
-        }
+    # Process the file line by line
+    while IFS= read -r line; do
+        # Check for YAML front matter start/end
+        if [[ "$line" == "---" ]]; then
+            if [[ $in_yaml -eq 0 ]]; then
+                in_yaml=1
+            else
+                in_yaml=0
+            fi
+            echo "$line" >> "$tmpfile"
+            continue
+        fi
 
-        if (need_blank_after) {
-            if ($0 ~ /^$/) {
-                # Next line is already a blank line
-                need_blank_after = 0
-            } else if ($0 ~ /^#{1,6} /) {
-                # Next line is another heading; no need to add a blank line
-                need_blank_after = 0
-            } else {
-                print ""  # Insert a blank line after the heading
-                need_blank_after = 0
-            }
-        }
+        # If inside YAML, do not process
+        if [[ $in_yaml -eq 1 ]]; then
+            echo "$line" >> "$tmpfile"
+            continue
+        fi
 
-        print $0
-        prev_blank = ($0 ~ /^$/) ? 1 : 0  # Update prev_blank flag
-    }
-    ' "$file" | sed -e 's/[ \t]*$//' > "$tmpfile"
+        # Handle headings: ensure blank lines before and after
+        if [[ "$line" =~ ^#{1,6}\  ]]; then
+            # Add a blank line before heading if not already present
+            if [[ $(tail -n 1 "$tmpfile") != "" ]]; then
+                echo "" >> "$tmpfile"
+            fi
+            echo "$line" >> "$tmpfile"
+            # Set a flag to add a blank line after heading
+            add_blank_after=1
+            continue
+        fi
 
-    # Further processing with sed to fix list indentation and remove trailing spaces
-    # Convert unordered list items to consistent indentation (e.g., 2 spaces)
-    sed -i '/^[*+-] /s/^[*+-] */  - /' "$tmpfile"
+        if [[ "$add_blank_after" -eq 1 ]]; then
+            if [[ "$line" != "" && ! "$line" =~ ^#{1,6}\  ]]; then
+                echo "" >> "$tmpfile"
+            fi
+            add_blank_after=0
+        fi
 
-    # Ensure there is a blank line between paragraphs
-    sed -i '/^[^#\*\+-]/{
-        N
-        /\n[^#\*\+-]/{
-            /\n$/!{
-                s/\n/\n\n/
-            }
-        }
-    }' "$tmpfile"
+        # Fix unordered list indentation to two spaces
+        if [[ "$line" =~ ^[*+-]\  ]]; then
+            # Replace leading symbols with two spaces and a dash
+            fixed_line=$(echo "$line" | sed -E 's/^([*+-])\ +/  - /')
+            echo "$fixed_line" >> "$tmpfile"
+            continue
+        fi
 
+        # Remove trailing whitespaces
+        fixed_line=$(echo "$line" | sed -E 's/[ \t]+$//')
+        echo "$fixed_line" >> "$tmpfile"
+    done < "$file"
+
+    # Further processing: ensure single blank lines between paragraphs
     # Remove multiple consecutive blank lines
     sed -i '/^$/N;/^\n$/D' "$tmpfile"
-
-    # Optional: Ensure unique headings (requires manual intervention or more complex scripting)
-    # This step is not automated to avoid unintended changes
 
     # Replace the original file with the processed temporary file
     mv "$tmpfile" "$file"

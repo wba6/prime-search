@@ -80,12 +80,14 @@ Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac
 ### Algorithm 2
 #### Description
 *Detail the Sieve of Atkin algorithm, highlighting its innovative approach to prime number generation.*
+
 #### Efficiency
 *Evaluate its performance metrics and compare its efficiency with other sieves.*
 
 ### Algorithm 3
 #### Description
 *Describe the trial division method for finding primes, including its simplicity and implementation.*
+
 #### Efficiency
 *Discuss the limitations in terms of efficiency, especially for large numbers, and compare it to sieve-based methods.*
 
