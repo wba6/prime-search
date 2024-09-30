@@ -9,7 +9,7 @@ geometry:
 
   - right=1in
 
-fontsize: 6pt  # Adjusted to a more standard size
+fontsize: 2pt  # Adjusted to a more standard size
 
 header-includes:
 
