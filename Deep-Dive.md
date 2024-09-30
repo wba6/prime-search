@@ -4,14 +4,14 @@ geometry:
   - bottom=1in
   - left=1in
   - right=1in
-fontsize: 2pt  # Adjusted to a more standard size
+fontsize: 8pt
 header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
-  - \usepackage{etoolbox}  # Needed for patching commands
-  - \AtBeginDocument{\begin{center}}  # Starts centering at the beginning
-  - \AtEndDocument{\end{center}}      # Ends centering at the end
+  - \usepackage{etoolbox}
+  - \AtBeginDocument{\begin{center}}
+  - \AtEndDocument{\end{center}}
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
