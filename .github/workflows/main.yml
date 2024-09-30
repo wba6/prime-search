@@ -60,7 +60,7 @@ jobs:
       - name: Convert Markdown to PDF
         run: |
           mkdir -p pdf
-          pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf --pdf-engine=xelatex --toc --number-sections
+          pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf --pdf-engine=xelatex
 
       # 7. Commit and Push PDF (if changed)
       - name: Commit and Push PDF
