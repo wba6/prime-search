@@ -1,7 +1,10 @@
-name: Convert Markdown to PDF
+name: Convert Markdown to PDF and Commit
 
+# Trigger the workflow on push events to the main branch
 on:
   push:
+    branches:
+      - main
     paths:
       - 'Deep-Dive.md'
       - '.github/workflows/convert-markdown-to-pdf.yml'
@@ -11,20 +14,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          # Fetch all history for all branches and tags
+          fetch-depth: 0
 
-      - name: Set up Pandoc
+      # Step 2: Set up Pandoc and LaTeX
+      - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive texlive-xetex texlive-latex-extra
 
+      # Step 3: Convert Markdown to PDF
       - name: Convert Markdown to PDF
         run: |
-          pandoc Deep-Dive.md -o Deep-Dive.pdf
+          mkdir -p pdf
+          pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf
 
-      - name: Upload PDF Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: Deep-Dive-PDF
-          path: Deep-Dive.pdf
+      # Step 4: Configure Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 5: Commit and Push PDF if there are changes
+      - name: Commit and Push PDF
+        run: |
+          # Check if there are changes in the PDF
+          if [ `git status --porcelain | grep "pdf/Deep-Dive.pdf" | wc -l` -gt 0 ]; then
+            git add pdf/Deep-Dive.pdf
+            git commit -m "Update Deep-Dive.pdf [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          # GitHub automatically provides GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
