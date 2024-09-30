@@ -4,16 +4,16 @@ geometry:
   - bottom=1in
   - left=1in
   - right=1in
-fontsize: 6pt
+fontsize: 6pt  # Adjusted to a more standard size
 header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
-  - \allsectionsfont{\centering}
-  -	\titleformat*{\section}{\centering\Large\bfseries}
-  -	\titleformat*{\subsection}{\centering\large\bfseries}
-  
+  - \usepackage{etoolbox}  # Needed for patching commands
+  - \AtBeginDocument{\begin{center}}  # Starts centering at the beginning
+  - \AtEndDocument{\end{center}}      # Ends centering at the end
 ---
+
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
