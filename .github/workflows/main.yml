@@ -11,46 +11,65 @@ on:
     paths:
       - 'Deep-Dive.md'
       - '.github/workflows/convert-markdown-to-pdf.yml'
+      - 'scripts/fix_markdown.sh'  # Watch the fix script for changes
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Ensures full history is fetched
 
+      # 2. Set Up Git User for Commit
+      - name: Set up Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 3. Run Markdown Fix Script
+      - name: Fix Markdown Formatting
+        run: |
+          # Ensure the script is executable
+          chmod +x scripts/fix_markdown.sh
+          # Run the script on Deep-Dive.md with backup option
+          scripts/fix_markdown.sh -b Deep-Dive.md
+
+      # 4. Commit and Push Markdown Fixes (if any)
+      - name: Commit and Push Markdown Fixes
+        run: |
+          # Check if Deep-Dive.md was modified
+          if git diff --quiet Deep-Dive.md; then
+            echo "No Markdown fixes needed."
+          else
+            git add Deep-Dive.md
+            git commit -m "Fix Markdown formatting in Deep-Dive.md"
+            git push origin main
+          fi
+
+      # 5. Install Pandoc and LaTeX Dependencies
       - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive texlive-xetex texlive-latex-extra
 
+      # 6. Convert Markdown to PDF
       - name: Convert Markdown to PDF
         run: |
           mkdir -p pdf
-          pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf
+          pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf --pdf-engine=xelatex --toc --number-sections
 
+      # 7. Commit and Push PDF (if changed)
       - name: Commit and Push PDF
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Check if pdf/Deep-Dive.pdf has changes
-          if git diff --exit-code --quiet pdf/Deep-Dive.pdf; then
-            echo "No changes to commit"
+          # Check if pdf/Deep-Dive.pdf was modified
+          if git diff --quiet pdf/Deep-Dive.pdf; then
+            echo "No PDF updates needed."
           else
-            # Configure Git
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-
-            # Add and commit the PDF
             git add pdf/Deep-Dive.pdf
             git commit -m "Update Deep-Dive.pdf"
-
-            # Set the remote URL with GITHUB_TOKEN for authentication
-            git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-
-            # Push the changes
             git push origin main
           fi
