@@ -35,7 +35,7 @@ header-includes:
 ---
 
 ## Abstract
-*Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.* Not as detailed as introduction
+*Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.* 
 
 ## Introduction
 *Introduce the topic of prime number algorithms, the importance of efficiency in computational number theory, and an overview of what the paper will cover.*
