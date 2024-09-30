@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # Script Name: fix_markdown.sh
-# Description: Fixes invalid Markdown formatting by ensuring proper spacing around headings.
+# Description: Fixes invalid Markdown formatting by ensuring proper spacing, list indentation, and removing trailing whitespaces.
 # Usage: ./fix_markdown.sh [-b] file1.md [file2.md ...]
-# Options:
-#   -b    Create a backup of the original file with a .bak extension.
 
 # Function to display usage instructions
 usage() {
@@ -52,7 +50,7 @@ for file in "$@"; do
     # Create a temporary file for processing
     tmpfile=$(mktemp)
 
-    # Use awk to process the file
+    # Process the file with awk and sed
     awk '
     BEGIN {
         in_yaml = 0      # Flag to indicate if inside YAML front matter
@@ -100,7 +98,24 @@ for file in "$@"; do
         print $0
         prev_blank = ($0 ~ /^$/) ? 1 : 0  # Update prev_blank flag
     }
-    ' "$file" > "$tmpfile"
+    ' "$file" | sed -e 's/[ \t]*$//' > "$tmpfile"
+
+    # Further processing with sed to fix list indentation
+    # Convert list items to consistent indentation (e.g., 2 spaces)
+    sed -i '/^[*+-] /s/^[*+-] */  - /' "$tmpfile"
+
+    # Ensure there is a blank line between paragraphs
+    sed -i '/^[^#\*\+-]/{
+        N
+        /\n[^#\*\+-]/{
+            /\n$/!{
+                s/\n/\n\n/
+            }
+        }
+    }' "$tmpfile"
+
+    # Remove multiple consecutive blank lines
+    sed -i '/^$/N;/^\n$/D' "$tmpfile"
 
     # Replace the original file with the processed temporary file
     mv "$tmpfile" "$file"
