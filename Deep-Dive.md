@@ -5,6 +5,9 @@ geometry:
   - left=1in
   - right=1in
 fontsize: 6pt
+header-includes:
+  - \usepackage{sectsty}
+  - \allsectionsfont{\centering}
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
