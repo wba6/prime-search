@@ -49,12 +49,7 @@ jobs:
           # Run the script on Deep-Dive.md with backup option
           scripts/fix_markdown.sh -b Deep-Dive.md
 
-      # 6. Run Markdownlint to Fix Remaining Issues
-      - name: Run Markdownlint
-        run: |
-          markdownlint Deep-Dive.md --fix
-
-      # 7. Commit and Push Markdown Fixes (if any)
+      # 6. Commit and Push Markdown Fixes (if any)
       - name: Commit and Push Markdown Fixes
         run: |
           # Check if Deep-Dive.md was modified
