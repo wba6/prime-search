@@ -117,6 +117,9 @@ for file in "$@"; do
     # Remove multiple consecutive blank lines
     sed -i '/^$/N;/^\n$/D' "$tmpfile"
 
+    # Optional: Ensure unique headings (requires manual intervention or more complex scripting)
+    # This step is not automated to avoid unintended changes
+
     # Replace the original file with the processed temporary file
     mv "$tmpfile" "$file"
 
