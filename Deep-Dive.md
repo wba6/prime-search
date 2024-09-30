@@ -1,3 +1,15 @@
+---
+title: "Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms"
+author: "Your Name"
+date: "2024-09-30"
+geometry:
+  - top=1in
+  - bottom=1in
+  - left=1in
+  - right=1in
+fontsize: 12pt
+---
+
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
 ** Note we may not want a table of contents when we generate the final pdf**
