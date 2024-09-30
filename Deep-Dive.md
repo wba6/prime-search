@@ -2,21 +2,27 @@
 geometry:
 
   - top=1in
+
   - bottom=1in
 
   - left=1in
+
   - right=1in
 
 fontsize: 6pt  # Adjusted to a more standard size
+
 header-includes:
 
   - \usepackage{sectsty}
+
   - \allsectionsfont{\centering}
 
   - \usepackage{fancyhdr}
+
   - \usepackage{etoolbox}  # Needed for patching commands
 
   - \AtBeginDocument{\begin{center}}  # Starts centering at the beginning
+
   - \AtEndDocument{\end{center}}      # Ends centering at the end
 ---
 
@@ -29,18 +35,23 @@ header-includes:
 1. [Abstract](#abstract)
 
 2. [Introduction](#introduction)
+
 3. [History of the Sieve of Eratosthenes](#history-of-the-sieve-of-eratosthenes)
 
 4. [Efficiency of the Sieve of Eratosthenes](#efficiency-of-the-sieve-of-eratosthenes)
+
 5. [Other Prime-Finding Algorithms](#other-prime-finding-algorithms)
 
     1. [Algorithm 1](#Algorithm 1)
+
     2. [Algorithm 2](#Algorithm 2)
 
     3. [Algorithm 3](#Algorithm 3)
+
 6. [Comparative Analysis](#comparative-analysis)
 
 7. [Conclusion](#conclusion)
+
 8. [References](#references)
 
 ---
