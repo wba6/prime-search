@@ -1,7 +1,7 @@
 ---
 geometry:
   - top=1in
-  - bottom=1i
+  - bottom=1in
   - left=1in
   - right=1in
 fontsize: 2pt  # Adjusted to a more standard size
