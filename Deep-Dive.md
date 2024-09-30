@@ -1,6 +1,6 @@
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
-** Note we may not want a table of contents ** 
+** Note we may not want a table of contents when we generate the final pdf**
 ## Table of Contents
 1. [Abstract](#abstract)
 2. [Introduction](#introduction)
