@@ -74,5 +74,5 @@ Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac
 *Summarize the key findings of the paper, reiterate the efficiency of the Sieve of Eratosthenes, discuss the circumstances under which other algorithms may be more effective, and suggest potential areas for future research.*
 
 ## References
-*List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet
+*List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
 
