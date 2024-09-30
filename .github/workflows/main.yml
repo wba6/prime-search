@@ -1,6 +1,9 @@
 name: Convert Markdown to PDF and Commit
 
-# Trigger the workflow on push events to the main branch
+# Define the permissions for GITHUB_TOKEN
+permissions:
+  contents: write  # Grants read and write access to repository contents
+
 on:
   push:
     branches:
@@ -9,47 +12,48 @@ on:
       - 'Deep-Dive.md'
       - '.github/workflows/convert-markdown-to-pdf.yml'
 
+permissions:
+  contents: write  # Grants write access to the GITHUB_TOKEN
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          # Fetch all history for all branches and tags
-          fetch-depth: 0
+          fetch-depth: 0  # Ensures full history is fetched
 
-      # Step 2: Set up Pandoc and LaTeX
       - name: Install Pandoc and LaTeX
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc texlive texlive-xetex texlive-latex-extra
 
-      # Step 3: Convert Markdown to PDF
       - name: Convert Markdown to PDF
         run: |
           mkdir -p pdf
           pandoc Deep-Dive.md -o pdf/Deep-Dive.pdf
 
-      # Step 4: Configure Git
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      # Step 5: Commit and Push PDF if there are changes
       - name: Commit and Push PDF
-        run: |
-          # Check if there are changes in the PDF
-          if [ `git status --porcelain | grep "pdf/Deep-Dive.pdf" | wc -l` -gt 0 ]; then
-            git add pdf/Deep-Dive.pdf
-            git commit -m "Update Deep-Dive.pdf [skip ci]"
-            git push
-          else
-            echo "No changes to commit"
-          fi
         env:
-          # GitHub automatically provides GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if pdf/Deep-Dive.pdf has changes
+          if git diff --exit-code --quiet pdf/Deep-Dive.pdf; then
+            echo "No changes to commit"
+          else
+            # Configure Git
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            # Add and commit the PDF
+            git add pdf/Deep-Dive.pdf
+            git commit -m "Update Deep-Dive.pdf"
+
+            # Set the remote URL with GITHUB_TOKEN for authentication
+            git remote set-url origin https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+
+            # Push the changes
+            git push origin main
+          fi
