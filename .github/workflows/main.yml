@@ -12,9 +12,6 @@ on:
       - 'Deep-Dive.md'
       - '.github/workflows/convert-markdown-to-pdf.yml'
 
-permissions:
-  contents: write  # Grants write access to the GITHUB_TOKEN
-
 jobs:
   build:
     runs-on: ubuntu-latest
