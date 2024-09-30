@@ -14,7 +14,6 @@ header-includes:
   - \AtEndDocument{\end{center}}      # Ends centering at the end
 ---
 
-
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
 ** Note we may not want a table of contents when we generate the final pdf**
