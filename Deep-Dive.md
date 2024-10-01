@@ -30,34 +30,6 @@ header-includes:
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
-** Note we may not want a table of contents when we generate the final pdf**
-
-## Table of Contents
-
-1. [Abstract](#abstract)
-
-2. [Introduction](#introduction)
-
-3. [History of the Sieve of Eratosthenes](#history-of-the-sieve-of-eratosthenes)
-
-4. [Efficiency of the Sieve of Eratosthenes](#efficiency-of-the-sieve-of-eratosthenes)
-
-5. [Other Prime-Finding Algorithms](#other-prime-finding-algorithms)
-
-    1. [Algorithm 1](#Algorithm 1)
-
-    2. [Algorithm 2](#Algorithm 2)
-
-    3. [Algorithm 3](#Algorithm 3)
-
-6. [Comparative Analysis](#comparative-analysis)
-
-7. [Conclusion](#conclusion)
-
-8. [References](#references)
-
----
-
 ## Abstract
 *Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.*
 
