@@ -9,7 +9,6 @@ documentclass: article
 header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
-  - \usepackage{fancyhdr}
   - \usepackage{anyfontsize}
   - \usepackage{setspace}
 ---
