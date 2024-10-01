@@ -50,8 +50,9 @@ for file in "$@"; do
     # Create a temporary file for processing
     tmpfile=$(mktemp)
 
-    # Initialize YAML front matter flags
+    # Initialize variables
     in_yaml=0
+    add_blank_after=0
 
     # Process the file line by line
     while IFS= read -r line; do
@@ -92,9 +93,9 @@ for file in "$@"; do
         fi
 
         # Fix unordered list indentation to two spaces
-        if [[ "$line" =~ ^[*+-]\  ]]; then
+        if [[ "$line" =~ ^[*+-][[:space:]]+ ]]; then
             # Replace leading symbols with two spaces and a dash
-            fixed_line=$(echo "$line" | sed -E 's/^([*+-])\ +/  - /')
+            fixed_line=$(echo "$line" | sed -E 's/^([*+-])[[:space:]]+/  - /')
             echo "$fixed_line" >> "$tmpfile"
             continue
         fi
@@ -106,7 +107,7 @@ for file in "$@"; do
 
     # Further processing: ensure single blank lines between paragraphs
     # Remove multiple consecutive blank lines
-    sed -i '/^$/N;/^\n$/D' "$tmpfile"
+    awk 'NF{blank=0} !NF{blank++} blank<2' "$tmpfile" > "${tmpfile}.tmp" && mv "${tmpfile}.tmp" "$tmpfile"
 
     # Replace the original file with the processed temporary file
     mv "$tmpfile" "$file"
