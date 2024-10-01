@@ -6,6 +6,26 @@ geometry:
   - right=1in
 fontsize: 4pt
 documentclass: article
+header-includes:
+  - \usepackage{sectsty}
+  - \allsectionsfont{\centering}
+  - \usepackage{fancyhdr}
+  - \usepackage{anyfontsize}
+  - \usepackage{setspace}
+  - |
+    \makeatletter
+    \renewcommand\normalsize{%
+      \@setfontsize\normalsize{8pt}{10pt}%
+      \abovedisplayskip 8pt
+      \abovedisplayshortskip 4pt
+      \belowdisplayshortskip 4pt
+      \belowdisplayskip 8pt
+      \abovedisplayskip 8pt
+      \abovedisplayshortskip 4pt
+      \belowdisplayshortskip 4pt
+      \belowdisplayskip 8pt
+    }
+    \makeatother
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
