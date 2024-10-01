@@ -4,7 +4,7 @@ geometry:
   - bottom=1in
   - left=1in
   - right=1in
-fontsize: 8pt
+fontsize: 4pt
 documentclass: article
 header-includes:
   - \usepackage{sectsty}
