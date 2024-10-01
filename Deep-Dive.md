@@ -97,4 +97,5 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 ## References
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
+https://medium.com/geekculture/sieve-of-eratosthenes-one-of-the-oldest-algorithms-still-prevalent-as-if-it-were-born-yesterday-c3e854df5dc6 - provides a few optimizations for the sieve of Eratosthenes
 
