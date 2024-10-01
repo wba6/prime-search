@@ -6,11 +6,6 @@ geometry:
   - right=1in
 fontsize: 4pt
 documentclass: article
-header-includes:
-  - \usepackage{sectsty}
-  - \allsectionsfont{\centering}
-  - \usepackage{anyfontsize}
-  - \usepackage{setspace}
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
