@@ -44,6 +44,12 @@ Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac
 
 *Discuss the origins of the Sieve of Eratosthenes, its historical significance, and its foundational role in the study of prime numbers.*
 
+One of the most popular prime number algorithms is the Sieve of Eratosthenes. This algorithm was founded by a famous Greek scientist named Eratosthenes of Cyrene. Eratosthenes had many talents, one of which was in mathematics. Mathematics during his life was nothing compared to modern-day mathematics; thus, it was easier to become talented at mathematics. 
+
+Eratosthenes discovered a systematic way to find primes. This system involved starting with a prime and then marking all multiples of that prime as composite. The numbers that do not get crossed off end up being the primes. 
+
+The Sieve of Eratosthenes has played a significant role in finding "small" primes back during the time when computers did not exist. Although better algorithms have been found to compute primes using computers, this algorithm is one that every math or computer science student should be taught.
+
 ## Efficiency of the Sieve of Eratosthenes
 
 *Analyze the computational complexity of the Sieve of Eratosthenes, including time and space requirements. Discuss its practical performance and any optimizations that have been developed.*
@@ -92,3 +98,4 @@ Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
 
+https://medium.com/geekculture/sieve-of-eratosthenes-one-of-the-oldest-algorithms-still-prevalent-as-if-it-were-born-yesterday-c3e854df5dc6 - provides a few optimizations for the sieve of Eratosthenes
