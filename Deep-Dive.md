@@ -56,17 +56,17 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 ## Other Prime-Finding Algorithms
 
-### Algorithm 1
+### Trial Division
 
 #### Description
 
-*Explain how the Sieve of Sundaram works and its methodology for finding prime numbers.*
+*Explain how the Trial Division algorithm works and its methodology for finding prime numbers.*
 
 #### Efficiency
 
 *Analyze the computational complexity and practical efficiency compared to the Sieve of Eratosthenes.*
 
-### Algorithm 2
+### Sieve of Atkin
 
 #### Description
 
@@ -76,11 +76,11 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 *Evaluate its performance metrics and compare its efficiency with other sieves.*
 
-### Algorithm 3
+### Miller-Rabin Primality Test
 
 #### Description
 
-*Describe the trial division method for finding primes, including its simplicity and implementation.*
+*Describe the Miller-Rabin Primality Test method for finding primes, including its simplicity and implementation.*
 
 #### Efficiency
 
