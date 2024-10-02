@@ -1,5 +1,4 @@
 ---
-layout: default
 permalink: /
 geometry:
   - top=1in
