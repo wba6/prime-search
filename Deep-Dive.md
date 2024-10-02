@@ -1,4 +1,7 @@
 ---
+layout: default
+title: Deep Dive
+permalink: /
 geometry:
   - top=1in
   - bottom=1in
