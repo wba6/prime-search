@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Deep-Dive.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Deep-Dive.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Deep-Dive.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Deep-Dive.md"
+                "file": "README.md"
               }
             }
           }
@@ -148,10 +148,11 @@
   },
   "active": "78a965dd0a74c856",
   "lastOpenFiles": [
-    "code/Cargo.lock",
-    "pdf/Deep-Dive.pdf",
-    "code/prime_comparison_optimized.png",
     "Deep-Dive.md",
+    "README.md",
+    "pdf/Deep-Dive.pdf",
+    "code/Cargo.lock",
+    "code/prime_comparison_optimized.png",
     "code/miller_rabin.csv~",
     "code/trial_division.csv~",
     "code/sieve_of_atkin.csv",
@@ -161,8 +162,6 @@
     "code/prime_comparison.png",
     "code/prime_graph.py",
     "code/target/release/deps/prime_finder.pdb",
-    "code/target/release/deps/prime_finder.exe",
-    "code/readme.md",
-    "README.md"
+    "code/readme.md"
   ]
 }
