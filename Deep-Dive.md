@@ -111,9 +111,7 @@ $O(n \log \log n)$
 This is nearly linear, making the sieve exceptionally efficient for large values of n.
 #### Benefit's
 
-
 #### Challenges
-
 
 ## Other Prime-Finding Algorithms
 
