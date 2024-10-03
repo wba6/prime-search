@@ -148,6 +148,7 @@
   },
   "active": "78a965dd0a74c856",
   "lastOpenFiles": [
+    "code/Cargo.lock",
     "pdf/Deep-Dive.pdf",
     "code/prime_comparison_optimized.png",
     "Deep-Dive.md",
@@ -161,7 +162,6 @@
     "code/prime_graph.py",
     "code/target/release/deps/prime_finder.pdb",
     "code/target/release/deps/prime_finder.exe",
-    "code/target/release/deps/prime_finder.prime_finder.6feeedd124279978-cgu.00.rcgu.o",
     "code/readme.md",
     "README.md"
   ]

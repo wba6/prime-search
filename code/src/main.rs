@@ -1,5 +1,5 @@
 use clap::Parser;
-use crossbeam::channel::{unbounded, Sender};
+use crossbeam::channel::{unbounded, tick, Sender};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use std::fs::File;
 use std::sync::{
@@ -9,6 +9,9 @@ use std::sync::{
 use std::thread;
 use std::time::{Duration, Instant};
 use rand::Rng;
+use csv::Writer;
+use log::{error, info, warn};
+use env_logger;
 
 /// Program to find primes using different algorithms and record them in CSV files.
 #[derive(Parser, Debug)]
@@ -48,6 +51,9 @@ impl Algorithm {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Initialize logging
+    env_logger::init();
+
     // Parse command line arguments
     let args = Args::parse();
     let duration = Duration::from_secs(args.duration);
@@ -55,6 +61,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "Running prime algorithms for {} seconds...",
         args.duration
     );
+
+    info!("Program started with duration: {} seconds", args.duration);
 
     // Shared stop flag
     let stop_flag = Arc::new(AtomicBool::new(false));
@@ -67,44 +75,54 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Create CSV writers
     let td_file = File::create(Algorithm::TrialDivision.csv_filename())?;
-    let mut td_writer = csv::Writer::from_writer(td_file);
+    let mut td_writer = Writer::from_writer(td_file);
     td_writer.write_record(&["prime", "timestamp"])?;
 
     let soe_file = File::create(Algorithm::SieveOfEratosthenes.csv_filename())?;
-    let mut soe_writer = csv::Writer::from_writer(soe_file);
+    let mut soe_writer = Writer::from_writer(soe_file);
     soe_writer.write_record(&["prime", "timestamp"])?;
 
     let soa_file = File::create(Algorithm::SieveOfAtkin.csv_filename())?;
-    let mut soa_writer = csv::Writer::from_writer(soa_file);
+    let mut soa_writer = Writer::from_writer(soa_file);
     soa_writer.write_record(&["prime", "timestamp"])?;
 
     let mr_file = File::create(Algorithm::MillerRabin.csv_filename())?;
-    let mut mr_writer = csv::Writer::from_writer(mr_file);
+    let mut mr_writer = Writer::from_writer(mr_file);
     mr_writer.write_record(&["prime", "timestamp"])?;
 
     // Set up progress bars
     let m = MultiProgress::new();
     let pb_style = ProgressStyle::with_template(
-        "{msg} | Largest Prime: {pos} | Elapsed: {elapsed_precise}",
+        "{spinner} {msg} | Elapsed: {elapsed_precise}", // Updated template
     )
-        .unwrap()
-        .progress_chars("=>-");
+        .unwrap() // Only one unwrap is needed
+        .progress_chars("⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏");
 
-    let td_pb = m.add(ProgressBar::new(0));
+    // Initialize progress bars as spinners
+    let td_pb = m.add(ProgressBar::new_spinner());
     td_pb.set_style(pb_style.clone());
-    td_pb.set_message(Algorithm::TrialDivision.as_str());
+    td_pb.set_message(format!("{} | Largest Prime: 0", Algorithm::TrialDivision.as_str())); // Initial message
 
-    let soe_pb = m.add(ProgressBar::new(0));
+    let soe_pb = m.add(ProgressBar::new_spinner());
     soe_pb.set_style(pb_style.clone());
-    soe_pb.set_message(Algorithm::SieveOfEratosthenes.as_str());
+    soe_pb.set_message(format!(
+        "{} | Largest Prime: 0",
+        Algorithm::SieveOfEratosthenes.as_str()
+    )); // Initial message
 
-    let soa_pb = m.add(ProgressBar::new(0));
+    let soa_pb = m.add(ProgressBar::new_spinner());
     soa_pb.set_style(pb_style.clone());
-    soa_pb.set_message(Algorithm::SieveOfAtkin.as_str());
+    soa_pb.set_message(format!(
+        "{} | Largest Prime: 0",
+        Algorithm::SieveOfAtkin.as_str()
+    )); // Initial message
 
-    let mr_pb = m.add(ProgressBar::new(0));
+    let mr_pb = m.add(ProgressBar::new_spinner());
     mr_pb.set_style(pb_style.clone());
-    mr_pb.set_message(Algorithm::MillerRabin.as_str());
+    mr_pb.set_message(format!(
+        "{} | Largest Prime: 0",
+        Algorithm::MillerRabin.as_str()
+    )); // Initial message
 
     // Start time
     let start_time = Instant::now();
@@ -118,18 +136,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Start algorithm threads
     let td_handle = thread::spawn(move || {
         trial_division(td_sender, td_stop);
+        info!("Trial Division thread terminated.");
     });
 
     let soe_handle = thread::spawn(move || {
         sieve_of_eratosthenes(soe_sender, soe_stop);
+        info!("Sieve of Eratosthenes thread terminated.");
     });
 
     let soa_handle = thread::spawn(move || {
         sieve_of_atkin(soa_sender, soa_stop);
+        info!("Sieve of Atkin thread terminated.");
     });
 
     let mr_handle = thread::spawn(move || {
         miller_rabin(mr_sender, mr_stop);
+        info!("Miller-Rabin thread terminated.");
     });
 
     // Track largest primes
@@ -140,10 +162,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         (Algorithm::MillerRabin, 0u64),
     ];
 
+    // Set up a ticker for periodic updates (every 100ms)
+    let ticker = tick(Duration::from_millis(100));
+
     // Main loop to receive primes and write to CSV
     loop {
         let elapsed = start_time.elapsed();
         if elapsed >= duration {
+            info!("Duration reached. Stopping algorithms.");
             break;
         }
 
@@ -151,49 +177,66 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             recv(td_receiver) -> msg => {
                 if let Ok(prime) = msg {
                     let timestamp = format!("{:.2}", elapsed.as_secs_f64());
-                    td_writer.serialize((&prime, &timestamp)).ok();
-                    td_writer.flush().ok();
+                    if let Err(e) = td_writer.serialize((&prime, &timestamp)) {
+                        error!("Failed to serialize Trial Division prime: {}", e);
+                    }
+                    if let Err(e) = td_writer.flush() {
+                        error!("Failed to flush Trial Division writer: {}", e);
+                    }
                     if prime > largest_primes[0].1 {
                         largest_primes[0].1 = prime;
-                        td_pb.set_position(prime);
-                        // No need to update the message with primes and elapsed time here
+                        td_pb.set_message(format!("{} | Largest Prime: {}", Algorithm::TrialDivision.as_str(), prime));
                     }
                 }
             },
             recv(soe_receiver) -> msg => {
                 if let Ok(prime) = msg {
                     let timestamp = format!("{:.2}", elapsed.as_secs_f64());
-                    soe_writer.serialize((&prime, &timestamp)).ok();
-                    soe_writer.flush().ok();
+                    if let Err(e) = soe_writer.serialize((&prime, &timestamp)) {
+                        error!("Failed to serialize Sieve of Eratosthenes prime: {}", e);
+                    }
+                    if let Err(e) = soe_writer.flush() {
+                        error!("Failed to flush Sieve of Eratosthenes writer: {}", e);
+                    }
                     if prime > largest_primes[1].1 {
                         largest_primes[1].1 = prime;
-                        soe_pb.set_position(prime);
+                        soe_pb.set_message(format!("{} | Largest Prime: {}", Algorithm::SieveOfEratosthenes.as_str(), prime));
                     }
                 }
             },
             recv(soa_receiver) -> msg => {
                 if let Ok(prime) = msg {
                     let timestamp = format!("{:.2}", elapsed.as_secs_f64());
-                    soa_writer.serialize((&prime, &timestamp)).ok();
-                    soa_writer.flush().ok();
+                    if let Err(e) = soa_writer.serialize((&prime, &timestamp)) {
+                        error!("Failed to serialize Sieve of Atkin prime: {}", e);
+                    }
+                    if let Err(e) = soa_writer.flush() {
+                        error!("Failed to flush Sieve of Atkin writer: {}", e);
+                    }
                     if prime > largest_primes[2].1 {
                         largest_primes[2].1 = prime;
-                        soa_pb.set_position(prime);
+                        soa_pb.set_message(format!("{} | Largest Prime: {}", Algorithm::SieveOfAtkin.as_str(), prime));
                     }
                 }
             },
             recv(mr_receiver) -> msg => {
                 if let Ok(prime) = msg {
                     let timestamp = format!("{:.2}", elapsed.as_secs_f64());
-                    mr_writer.serialize((&prime, &timestamp)).ok();
-                    mr_writer.flush().ok();
+                    if let Err(e) = mr_writer.serialize((&prime, &timestamp)) {
+                        error!("Failed to serialize Miller-Rabin prime: {}", e);
+                    }
+                    if let Err(e) = mr_writer.flush() {
+                        error!("Failed to flush Miller-Rabin writer: {}", e);
+                    }
                     if prime > largest_primes[3].1 {
                         largest_primes[3].1 = prime;
-                        mr_pb.set_position(prime);
+                        mr_pb.set_message(format!("{} | Largest Prime: {}", Algorithm::MillerRabin.as_str(), prime));
                     }
                 }
             },
-            default(Duration::from_millis(100)) => {}
+            recv(ticker) -> _ => {
+                // Periodic updates or maintenance can be performed here if needed
+            },
         }
     }
 
@@ -202,12 +245,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // Signal threads to stop
     stop_flag.store(true, Ordering::SeqCst);
+    info!("Stop flag set. Waiting for threads to terminate.");
 
-    // Wait for threads to finish with a timeout to prevent indefinite hanging
+    // Wait for threads to finish
     let handles = vec![td_handle, soe_handle, soa_handle, mr_handle];
     for handle in handles {
         if let Err(e) = handle.join() {
-            eprintln!("A thread encountered an error: {:?}", e);
+            error!("A thread encountered an error: {:?}", e);
         }
     }
 
@@ -238,6 +282,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ));
 
     println!("Prime search completed.");
+    info!("Program terminated successfully.");
 
     Ok(())
 }
@@ -247,10 +292,14 @@ fn trial_division(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
     let mut num: u64 = 2;
     while !stop_flag.load(Ordering::SeqCst) {
         if is_prime_trial_division(num) {
-            sender.send(num).ok();
+            if sender.send(num).is_err() {
+                warn!("Trial Division receiver has been dropped.");
+                break;
+            }
         }
         num += 1;
     }
+    info!("Trial Division algorithm stopped.");
 }
 
 /// Check primality using Trial Division
@@ -283,21 +332,72 @@ fn sieve_of_eratosthenes(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
     sieve[1] = false;
     let mut current: usize = 2;
 
-    'outer: loop {
+    // Initial sieve processing
+    while current < size {
         if stop_flag.load(Ordering::SeqCst) {
+            info!("Sieve of Eratosthenes detected stop flag.");
+            return;
+        }
+        if sieve[current] {
+            if sender.send(current as u64).is_err() {
+                warn!("Sieve of Eratosthenes receiver has been dropped.");
+                return;
+            }
+            let mut multiple = current * 2;
+            while multiple < size {
+                if stop_flag.load(Ordering::SeqCst) {
+                    info!("Sieve of Eratosthenes detected stop flag during sieving.");
+                    return;
+                }
+                sieve[multiple] = false;
+                multiple += current;
+            }
+        }
+        current += 1;
+    }
+
+    // Dynamically increase sieve size
+    loop {
+        if stop_flag.load(Ordering::SeqCst) {
+            info!("Sieve of Eratosthenes detected stop flag.");
             break;
         }
 
+        // Increase sieve size
+        size *= 2;
+        sieve.resize(size, true);
+
+        // Re-sieve the new range
+        for p in 2..current {
+            if sieve[p] {
+                let mut multiple = p * 2;
+                while multiple < size {
+                    if stop_flag.load(Ordering::SeqCst) {
+                        info!("Sieve of Eratosthenes detected stop flag during dynamic sieving.");
+                        return;
+                    }
+                    sieve[multiple] = false;
+                    multiple += p;
+                }
+            }
+        }
+
+        // Sieve the new range
         while current < size {
             if stop_flag.load(Ordering::SeqCst) {
-                break 'outer;
+                info!("Sieve of Eratosthenes detected stop flag during sieving.");
+                return;
             }
             if sieve[current] {
-                sender.send(current as u64).ok(); // Cast usize to u64
+                if sender.send(current as u64).is_err() {
+                    warn!("Sieve of Eratosthenes receiver has been dropped.");
+                    return;
+                }
                 let mut multiple = current * 2;
                 while multiple < size {
                     if stop_flag.load(Ordering::SeqCst) {
-                        break 'outer;
+                        info!("Sieve of Eratosthenes detected stop flag during multiple elimination.");
+                        return;
                     }
                     sieve[multiple] = false;
                     multiple += current;
@@ -305,63 +405,135 @@ fn sieve_of_eratosthenes(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
             }
             current += 1;
         }
+    }
+    info!("Sieve of Eratosthenes algorithm stopped.");
+}
 
-        // Increase sieve size
-        size *= 2;
-        sieve.resize(size, true);
-        // Re-sieve the new range
-        for p in 2..current {
-            if sieve[p] {
-                let mut multiple = p * 2;
-                while multiple < size {
-                    if stop_flag.load(Ordering::SeqCst) {
-                        break 'outer;
-                    }
-                    sieve[multiple] = false;
-                    multiple += p;
+/// Complete Sieve of Atkin Implementation
+fn sieve_of_atkin(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
+    let mut limit = 1000;
+    let mut sieve = vec![false; (limit + 1) as usize];
+    sieve[2] = true;
+    sieve[3] = true;
+
+    // Initial sieve processing
+    for x in 1..=((limit as f64).sqrt() as u64) {
+        for y in 1..=((limit as f64).sqrt() as u64) {
+            if stop_flag.load(Ordering::SeqCst) {
+                info!("Sieve of Atkin detected stop flag during initial processing.");
+                return;
+            }
+
+            let n = 4 * x * x + y * y;
+            if n <= limit && (n % 12 == 1 || n % 12 == 5) {
+                sieve[n as usize] = !sieve[n as usize];
+            }
+
+            let n = 3 * x * x + y * y;
+            if n <= limit && n % 12 == 7 {
+                sieve[n as usize] = !sieve[n as usize];
+            }
+
+            if x > y {
+                let n = 3 * x * x - y * y;
+                if n <= limit && n % 12 == 11 {
+                    sieve[n as usize] = !sieve[n as usize];
                 }
             }
         }
     }
-}
 
-/// Sieve of Atkin Algorithm with Improved Stop Flag Checking
-fn sieve_of_atkin(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
-    let mut sieve = vec![false; 1000];
-    let mut size = 1000;
-    sieve[2] = true;
-    sieve[3] = true;
-
-    let mut n: u64 = 5;
-
-    'outer: loop {
-        if stop_flag.load(Ordering::SeqCst) {
-            break;
-        }
-
-        if (n as usize) >= size {
-            // Increase sieve size
-            size *= 2;
-            sieve.resize(size, false);
-            // Typically, Sieve of Atkin would reprocess the sieve here
-            // For simplicity, we'll skip detailed implementation
-        }
-
-        // Simple trial check (placeholder for actual Atkin logic)
-        if is_prime_trial_division(n) {
-            sieve[n as usize] = true;
-            sender.send(n).ok();
-        }
-
-        n += 1;
-
-        // Periodically check the stop flag within the loop
-        if n % 1000 == 0 { // Adjust the frequency as needed
-            if stop_flag.load(Ordering::SeqCst) {
-                break 'outer;
+    // Eliminate composites by marking multiples of squares
+    for r in 5..=((limit as f64).sqrt() as u64) {
+        if sieve[r as usize] {
+            let mut multiple = r * r;
+            while multiple <= limit {
+                sieve[multiple as usize] = false;
+                multiple += r * r;
             }
         }
     }
+
+    // Send primes up to the initial limit
+    for num in 2..=limit {
+        if sieve[num as usize] {
+            if sender.send(num).is_err() {
+                warn!("Sieve of Atkin receiver has been dropped.");
+                return;
+            }
+        }
+    }
+
+    let mut current = limit + 1;
+
+    // Dynamically increase sieve size
+    loop {
+        if stop_flag.load(Ordering::SeqCst) {
+            info!("Sieve of Atkin detected stop flag.");
+            break;
+        }
+
+        // Increase sieve size
+        limit *= 2;
+        sieve.resize((limit + 1) as usize, false);
+
+        // Reapply sieve rules for the new range
+        for x in 1..=((limit as f64).sqrt() as u64) {
+            for y in 1..=((limit as f64).sqrt() as u64) {
+                if stop_flag.load(Ordering::SeqCst) {
+                    info!("Sieve of Atkin detected stop flag during dynamic processing.");
+                    return;
+                }
+
+                let n = 4 * x * x + y * y;
+                if n > limit {
+                    continue;
+                }
+                if n % 12 == 1 || n % 12 == 5 {
+                    sieve[n as usize] = !sieve[n as usize];
+                }
+
+                let n = 3 * x * x + y * y;
+                if n > limit {
+                    continue;
+                }
+                if n % 12 == 7 {
+                    sieve[n as usize] = !sieve[n as usize];
+                }
+
+                if x > y {
+                    let n = 3 * x * x - y * y;
+                    if n <= limit && n % 12 == 11 {
+                        sieve[n as usize] = !sieve[n as usize];
+                    }
+                }
+            }
+        }
+
+        // Eliminate composites by marking multiples of squares
+        for r in 5..=((limit as f64).sqrt() as u64) {
+            if sieve[r as usize] {
+                let mut multiple = r * r;
+                while multiple <= limit {
+                    sieve[multiple as usize] = false;
+                    multiple += r * r;
+                }
+            }
+        }
+
+        // Send new primes in the extended range
+        for num in current..=limit {
+            if sieve[num as usize] {
+                if sender.send(num as u64).is_err() {
+                    warn!("Sieve of Atkin receiver has been dropped.");
+                    return;
+                }
+            }
+        }
+
+        current = limit + 1;
+    }
+    info!("Sieve of Atkin algorithm stopped.");
 }
 
 /// Miller-Rabin Primality Test Algorithm with Improved Stop Flag Checking
@@ -369,17 +541,22 @@ fn miller_rabin(sender: Sender<u64>, stop_flag: Arc<AtomicBool>) {
     let mut num: u64 = 2;
     while !stop_flag.load(Ordering::SeqCst) {
         if is_prime_miller_rabin(num) {
-            sender.send(num).ok();
+            if sender.send(num).is_err() {
+                warn!("Miller-Rabin receiver has been dropped.");
+                break;
+            }
         }
         num += 1;
 
         // Periodically check the stop flag
-        if num % 1000 == 0 { // Adjust as needed
+        if num % 1000 == 0 {
             if stop_flag.load(Ordering::SeqCst) {
+                info!("Miller-Rabin detected stop flag.");
                 break;
             }
         }
     }
+    info!("Miller-Rabin algorithm stopped.");
 }
 
 /// Check primality using Miller-Rabin
@@ -433,7 +610,7 @@ fn modpow(mut base: u64, mut exp: u64, modu: u64) -> u64 {
     if modu == 1 {
         return 0;
     }
-    let mut result: u64 = 1; // Explicitly type as u64
+    let mut result: u64 = 1;
     base = base % modu;
     while exp > 0 {
         if exp % 2 == 1 {
