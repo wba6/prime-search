@@ -1,24 +1,31 @@
 use crate::export::export_to_csv;
-use crate::progress::create_progress_bar;
 use crate::stats::AlgorithmStats;
 use rand::Rng;
 use std::time::{Duration, Instant};
 
-pub fn run_miller_rabin(run_until_stopped: bool) {
+pub fn run_miller_rabin(run_until_stopped: bool, time_limit: Option<f64>) {
     let algorithm_name = String::from("Miller-Rabin Primality Test");
-    let mut limit = 1_000_000_000_000u64; // Starting limit
-    let mut largest_prime = 0u64;
-    let mut num_primes_found = 0usize;
+    let mut start = 2u64; // Starting number
+    let segment_size = 1_000; // Numbers to test in each iteration
+    let mut primes = Vec::new(); // List of all found primes
     let start_time = Instant::now();
 
     loop {
-        let (largest_in_run, primes_found_in_run) = miller_rabin_test(limit);
-        if largest_in_run > largest_prime {
-            largest_prime = largest_in_run;
+        // Check time limit before starting the segment
+        if let Some(limit_seconds) = time_limit {
+            if start_time.elapsed() >= Duration::from_secs_f64(limit_seconds) {
+                println!("Time limit reached. Stopping execution.");
+                break;
+            }
         }
-        num_primes_found += primes_found_in_run;
+
+        let end = start + segment_size - 1;
+        let (new_primes, largest_prime, time_up) =
+            miller_rabin_test(start, end, start_time, time_limit);
+        primes.extend_from_slice(&new_primes);
 
         let time_taken = start_time.elapsed();
+        let num_primes_found = primes.len();
 
         let stats = AlgorithmStats {
             algorithm_name: algorithm_name.clone(),
@@ -28,47 +35,72 @@ pub fn run_miller_rabin(run_until_stopped: bool) {
         };
 
         // Export to CSV with a specific filename
-        let filename = format!("{}_stats.csv", algorithm_name.replace(' ', "_").to_lowercase());
+        let filename = format!(
+            "{}_stats.csv",
+            algorithm_name.replace(' ', "_").to_lowercase()
+        );
         export_to_csv(&stats, &filename);
 
-        if !run_until_stopped {
+        if time_up {
+            println!("Time limit reached during processing. Stopping execution.");
             break;
         }
 
-        // Increase the limit for the next iteration
-        limit *= 10; // Increase the range of random numbers
+        // Adjusted logic here
+        if time_limit.is_none() && !run_until_stopped {
+            break;
+        }
+
+        // Prepare for next segment
+        start = end + 1;
 
         println!(
-            "Increased limit to {}. Continuing to find larger primes...",
-            limit
+            "Processed up to {}. Continuing to find larger primes...",
+            end
         );
     }
 }
 
-fn miller_rabin_test(limit: u64) -> (u64, usize) {
-    let mut rng = rand::thread_rng();
-    let mut largest_prime = 0u64;
-    let mut num_primes_found = 0usize;
-    let num_tests = 1000; // Number of candidates to test
 
-    let pb = create_progress_bar(num_tests, &format!("Running Miller-Rabin Primality Test up to {}", limit));
+fn miller_rabin_test(
+    start: u64,
+    end: u64,
+    start_time: Instant,
+    time_limit: Option<f64>,
+) -> (Vec<u64>, u64, bool) {
+    let mut new_primes = Vec::new();
+    let mut time_up = false;
+    let pb = crate::progress::create_progress_bar(
+        end - start + 1,
+        &format!("Running Miller-Rabin from {} to {}", start, end),
+    );
 
-    for _ in 0..num_tests {
-        pb.inc(1);
-        let n = rng.gen_range(limit / 2..limit);
-        if miller_rabin(n, 5) {
-            num_primes_found += 1;
-            if n > largest_prime {
-                largest_prime = n;
+    for n in start..=end {
+        if let Some(limit_seconds) = time_limit {
+            if start_time.elapsed() >= Duration::from_secs_f64(limit_seconds) {
+                pb.finish_and_clear();
+                println!("Time limit reached during processing. Stopping execution.");
+                time_up = true;
+                break;
             }
+        }
+        pb.inc(1);
+        if miller_rabin(n, 5) {
+            new_primes.push(n);
         }
     }
     pb.finish_and_clear();
-    (largest_prime, num_primes_found)
+
+    let largest_prime = *new_primes.last().unwrap_or(&0);
+    (new_primes, largest_prime, time_up)
 }
+
 fn miller_rabin(n: u64, k: u32) -> bool {
-    if n <= 2 || n % 2 == 0 {
-        return n == 2;
+    if n <= 3 {
+        return n == 2 || n == 3;
+    }
+    if n % 2 == 0 {
+        return false;
     }
 
     let mut d = n - 1;

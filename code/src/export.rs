@@ -1,5 +1,5 @@
 use crate::stats::AlgorithmStats;
-use std::fs::{File, OpenOptions};
+use std::fs::OpenOptions;
 use std::io::{BufWriter, Write};
 use std::path::Path;
 
