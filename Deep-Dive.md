@@ -142,7 +142,7 @@ Results from current program run:
   Trial Division | Largest Prime: 1188567577 | Elapsed: 12000.00s | Elapsed: 03:20:01
   Sieve of Eratosthenes | Largest Prime: 1188671413 | Elapsed: 12000.00s | Elapsed: 03:20:01
   Sieve of Atkin | Largest Prime: 1215682201 | Elapsed: 12000.00s | Elapsed: 03:20:01
-  Miller-Rabin | Largest Prime: 1188766571 | Elapsed: 12000.00s | Elapsed: 03:20:01   
+  Miller-Rabin | Largest Prime: 1188766571 | Elapsed: 12000.00s | Elapsed: 03:20:01
 
 ## Conclusion
 
