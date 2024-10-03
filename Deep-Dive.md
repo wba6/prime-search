@@ -64,12 +64,9 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 #### Time Complexity
 
-
 #### Benefit's
 
-
 #### Challenges
-
 
 ## Other Prime-Finding Algorithms
 
