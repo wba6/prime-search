@@ -47,12 +47,6 @@ impl Algorithm {
     }
 }
 
-struct PrimeRecord {
-    algorithm: Algorithm,
-    prime: u64,
-    timestamp: String,
-}
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Parse command line arguments
     let args = Args::parse();
