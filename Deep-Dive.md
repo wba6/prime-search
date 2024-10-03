@@ -83,7 +83,7 @@ Step 1: Mark Multiples of 2 The first prime number is 2. Mark all multiples of 2
 | ✔ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ |
 **Marked Multiples of 3:** 6, 9, 12, 15
 
-Termination The next unmarked number is 5. Since \( 5^2 = 25 > 16 \), we can stop the process. All remaining unmarked numbers are primes.
+Termination The next unmarked number is $5$. Since $5^2 = 25 > 16$, we can stop the process. All remaining unmarked numbers are primes.
 Final List of Primes:
 
 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
