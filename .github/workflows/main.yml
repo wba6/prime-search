@@ -84,3 +84,6 @@ jobs:
             git commit -m "Update Deep-Dive.pdf"
             git push origin main
           fi
+
+    outputs:
+      pdf-generated: ${{ steps.convert-to-pdf.outcome == 'success' }}
