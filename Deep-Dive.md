@@ -114,7 +114,7 @@ The total time spent marking multiples is:
 
 The sum of the reciprocals of the primes up to $\sqrt{n}$ is approximately $n\log \log n$. Therefore, the overall time complexity is:
 
-| $O(n \log \log n)$ | 
+| $O(n \log \log n)$ |
 |:-----------------------:|
 
 This is nearly linear, making the sieve exceptionally efficient for large values of n.
