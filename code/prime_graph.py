@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import numpy as np
+from tqdm import tqdm
 
 def read_csv_file(filename):
     """
@@ -20,43 +22,91 @@ def read_csv_file(filename):
         print(f"Error reading '{filename}': {e}")
         return None
 
-def process_data(df):
+def process_data(df, bin_size=1.0):
     """
     Processes the DataFrame to calculate cumulative primes over time.
-    Returns a DataFrame with timestamp and cumulative count.
+    Aggregates data into time bins to handle large datasets efficiently.
+
+    Parameters:
+    - df: DataFrame with 'prime' and 'timestamp' columns.
+    - bin_size: Size of each time bin in seconds (default: 1.0).
+
+    Returns:
+    - A DataFrame with 'bin_start' and 'cumulative_primes'.
     """
     if df is None or df.empty:
-        return pd.DataFrame(columns=['timestamp', 'cumulative_primes'])
-    # Create a DataFrame with unique timestamps and counts
-    counts = df.groupby('timestamp').size().reset_index(name='count')
-    # Sort by timestamp
-    counts = counts.sort_values('timestamp')
+        return pd.DataFrame(columns=['bin_start', 'cumulative_primes'])
+
+    # Define bin edges
+    max_time = df['timestamp'].max()
+    bins = np.arange(0, max_time + bin_size, bin_size)
+
+    # Assign each prime to a bin
+    df['bin'] = pd.cut(df['timestamp'], bins=bins, right=False, labels=bins[:-1])
+
+    # Count primes in each bin
+    counts = df.groupby('bin').size().reset_index(name='count')
+
+    # Ensure all bins are represented
+    all_bins = pd.DataFrame({'bin': bins[:-1]})
+    counts = pd.merge(all_bins, counts, on='bin', how='left').fillna(0)
+
+    # Sort by bin
+    counts = counts.sort_values('bin')
+
     # Calculate cumulative sum
     counts['cumulative_primes'] = counts['count'].cumsum()
-    return counts[['timestamp', 'cumulative_primes']]
 
-def plot_primes(data_dict, output_filename):
+    # Rename columns for clarity
+    counts.rename(columns={'bin': 'bin_start'}, inplace=True)
+
+    return counts[['bin_start', 'cumulative_primes']]
+
+def plot_primes(data_dict, output_filename, bin_size=1.0):
     """
     Plots the cumulative number of primes over time for each algorithm.
+    Aggregates data into time bins to handle large datasets efficiently.
     Saves the plot to the specified output filename.
-    """
-    plt.figure(figsize=(12, 8))
 
-    for algo, data in data_dict.items():
+    Parameters:
+    - data_dict: Dictionary with algorithm names as keys and processed DataFrames as values.
+    - output_filename: Name of the output image file (e.g., 'prime_comparison.png').
+    - bin_size: Size of each time bin in seconds.
+    """
+    plt.figure(figsize=(14, 8))
+
+    # Define colors and styles for better distinction
+    colors = {
+        'Trial Division': 'blue',
+        'Sieve of Eratosthenes': 'green',
+        'Sieve of Atkin': 'red',
+        'Miller-Rabin': 'purple'
+    }
+
+    linestyles = {
+        'Trial Division': '-',
+        'Sieve of Eratosthenes': '--',
+        'Sieve of Atkin': '-.',
+        'Miller-Rabin': ':'
+    }
+
+    for algo, data in tqdm(data_dict.items(), desc="Plotting Algorithms"):
         if data.empty:
             print(f"Warning: No data to plot for '{algo}'.")
             continue
-        plt.plot(data['timestamp'], data['cumulative_primes'], label=algo)
+        plt.plot(data['bin_start'], data['cumulative_primes'], label=algo,
+                 color=colors.get(algo, None),
+                 linestyle=linestyles.get(algo, '-'))
 
-    plt.title('Number of Primes Found Over Time')
-    plt.xlabel('Time Elapsed (seconds)')
-    plt.ylabel('Cumulative Number of Primes Found')
-    plt.legend()
-    plt.grid(True)
+    plt.title('Number of Primes Found Over Time', fontsize=16)
+    plt.xlabel('Time Elapsed (seconds)', fontsize=14)
+    plt.ylabel('Cumulative Number of Primes Found', fontsize=14)
+    plt.legend(title='Algorithms', fontsize=12)
+    plt.grid(True, which='both', linestyle='--', linewidth=0.5)
     plt.tight_layout()
-    plt.savefig(output_filename)
+    plt.savefig(output_filename, dpi=300)
     plt.close()
-    print(f"Graph saved as '{output_filename}'.")
+    print(f"\nGraph saved as '{output_filename}'.\n")
 
 def main():
     # Define the CSV filenames
@@ -67,17 +117,20 @@ def main():
         'Miller-Rabin': 'miller_rabin.csv'
     }
 
+    # Define bin size in seconds (adjust based on dataset size)
+    bin_size = 1.0  # 1 second
+
     # Read and process data for each algorithm
     data_dict = {}
     for algo, filename in algorithms.items():
         print(f"Processing '{algo}' from '{filename}'...")
         df = read_csv_file(filename)
-        processed_data = process_data(df)
+        processed_data = process_data(df, bin_size=bin_size)
         data_dict[algo] = processed_data
 
     # Plot the data
-    output_image = 'prime_comparison.png'
-    plot_primes(data_dict, output_image)
+    output_image = 'prime_comparison_optimized.png'
+    plot_primes(data_dict, output_image, bin_size=bin_size)
 
 if __name__ == "__main__":
     main()
