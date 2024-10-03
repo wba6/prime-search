@@ -92,7 +92,6 @@ Final List of Primes:
 
 **Primes up to 16:** 2, 3, 5, 7, 11, 13
 
-
 #### Time Complexity
 
 The time complexity of an algorithm measures how the running time increases with the size of the input. For the Sieve of Eratosthenes:
