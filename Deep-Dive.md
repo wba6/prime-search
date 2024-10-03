@@ -63,11 +63,21 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 *Explain how the Trial Division algorithm works and its methodology for finding prime numbers.*
 
+The Trial Division algorithm is typically the easiest to understand prime number algorithm. This algorithm aims to determine if a number can be factored compared to how the Sieve of Eratosthenes works by eliminating multiples of primes. There is a strategic strategy to determine the possible factors of a number. The possible factors of a number turn out being all numbers less than the square root of said number
+
+The algorithm goes as follows:
++ Take in a positive integer n
++ Determine the range of numbers you need to check as possible factors
++ Iterate through the range of possible factors
++ If the factor divides evenly into the number, then it is composite
++ If all possible factors do not divide evenly into the number, then it is prime.
+
+
 #### Efficiency
 
 *Analyze the computational complexity and practical efficiency compared to the Sieve of Eratosthenes.*
 
-### Sieve of Atkin
+**Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that 
 
 #### Description
 
