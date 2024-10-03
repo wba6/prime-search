@@ -12,7 +12,8 @@ header-includes:
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
   - \usepackage{anyfontsize}
-  - \usepackage{fontspec}
+  - \usepackage[utf8]{inputenc}
+  - \DeclareUnicodeCharacter{2212}{-}
   - \setmainfont{Times New Roman}
   - \usepackage{setspace}
   - |
