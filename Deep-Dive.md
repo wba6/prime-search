@@ -140,10 +140,12 @@ The typical interval for choosing a base is $1 < a < n - 1$
 
 #### Results from current program run:
 
-  Trial Division | Largest Prime: 1188567577 | Elapsed: 12000.00s | Elapsed: 03:20:01
-  Sieve of Eratosthenes | Largest Prime: 1188671413 | Elapsed: 12000.00s | Elapsed: 03:20:01
-  Sieve of Atkin | Largest Prime: 1215682201 | Elapsed: 12000.00s | Elapsed: 03:20:01
-  Miller-Rabin | Largest Prime: 1188766571 | Elapsed: 12000.00s | Elapsed: 03:20:01
+| **Algorithm**          | **Largest Prime** | **Elapsed (s)** | **Elapsed (HH:MM:SS)** |
+|------------------------|--------------------|-----------------|------------------------|
+| Trial Division         | 1,188,567,577      | 12,000.00s      | 03:20:00               |
+| Sieve of Eratosthenes   | 1,188,671,413      | 12,000.00s      | 03:20:00               |
+| Sieve of Atkin         | 1,215,682,201      | 12,000.00s      | 03:20:00               |
+| Miller-Rabin           | 1,188,766,571      | 12,000.00s      | 03:20:00               |
 
 ## Conclusion
 
