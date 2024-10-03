@@ -12,6 +12,8 @@ header-includes:
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
   - \usepackage{anyfontsize}
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
   - \usepackage{setspace}
   - |
     \makeatletter
