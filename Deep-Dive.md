@@ -66,23 +66,26 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime.
 
+**P** : Indicates the number is currently considered **prime**. 
+**C** : Indicates the number has been marked as **not prime** (composite).
+
 | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   | ✓   |
+| P   | P   | P   | P   | P   | P   | P   | P   | P   | P   | P   | P   | P   | P   | P   |
 
 Step 1: Mark Multiples of 2 The first prime number is 2. Mark all multiples of 2 (except 2 itself) as **not prime**.
 
 | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   |
+| P   | P   | C   | P   | C   | P   | C   | P   | C   | P   | C   | P   | C   | P   | C   |
 
 **Marked Multiples of 2:** 4, 6, 8, 10, 12, 14, 16 
 
 Step 2: Mark Multiples of 3 The next unmarked number is 3, which is prime. Mark all multiples of 3 (except 3 itself) as **not prime**.
 
-| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✗   | ✗   | ✓   | ✗   | ✓   | ✗   | ✗   | ✗   |
+| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |     |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |     |
 
 **Marked Multiples of 3:** 6, 9, 12, 15
 
@@ -92,7 +95,7 @@ Final List of Primes:
 
 | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |     |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✗   | ✗   | ✓   | ✗   | ✓   | ✗   | ✗   | ✗   |     |
+| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |     |
 
 **Primes up to 16:** 2, 3, 5, 7, 11, 13
 
