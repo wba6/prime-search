@@ -64,51 +64,51 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 #### Example of the Sieve of Eratosthenes
 
-Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime. 
+Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime.
 
 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
-|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----| 
-| ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | 
+|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
+| ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
 
 Step 1: Mark Multiples of 2 The first prime number is 2. Mark all multiples of 2 (except 2 itself) as **not prime**.
 
-| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 
+| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
 |---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
 | ✔ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ |
 
-**Marked Multiples of 2:** 4, 6, 8, 10, 12, 14, 16 ## Step 2: Mark Multiples of 3 The next unmarked number is 3, which is prime. Mark all multiples of 3 (except 3 itself) as **not prime**. 
+**Marked Multiples of 2:** 4, 6, 8, 10, 12, 14, 16 ## Step 2: Mark Multiples of 3 The next unmarked number is 3, which is prime. Mark all multiples of 3 (except 3 itself) as **not prime**.
 
 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
 |---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
 | ✔ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ |
-**Marked Multiples of 3:** 6, 9, 12, 15 
+**Marked Multiples of 3:** 6, 9, 12, 15
 
-Termination The next unmarked number is 5. Since \( 5^2 = 25 > 16 \), we can stop the process. All remaining unmarked numbers are primes. 
-Final List of Primes: 
+Termination The next unmarked number is 5. Since \( 5^2 = 25 > 16 \), we can stop the process. All remaining unmarked numbers are primes.
+Final List of Primes:
 
 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
-|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----| 
+|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
 | ✔ | ✔ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ | ✔ | ✖ | ✔ | ✖ | ✖ | ✖ |
 
 **Primes up to 16:** 2, 3, 5, 7, 11, 13
-
 
 #### Time Complexity
 
 The time complexity of an algorithm measures how the running time increases with the size of the input. For the Sieve of Eratosthenes:
 
-- **Initialization**: Creating the list takes $O(n)$ time.
-- **Marking Non-Primes**: For each prime $p$ , marking its multiples up to $n$  takes $O(n/p)$ time.
+  - **Initialization**: Creating the list takes $O(n)$ time.
+  - **Marking Non-Primes**: For each prime $p$ , marking its multiples up to $n$  takes $O(n/p)$ time.
 
 The total time spent marking multiples is:
- 
+
 $\sum_{p \leq \sqrt{n}} \frac{n}{p}$
 
-The sum of the reciprocals of the primes up to $\sqrt{n}$ is approximately $n\log \log n$. Therefore, the overall time complexity is: 
+The sum of the reciprocals of the primes up to $\sqrt{n}$ is approximately $n\log \log n$. Therefore, the overall time complexity is:
 
 $O(n \log \log n)$
 
 This is nearly linear, making the sieve exceptionally efficient for large values of n.
+
 #### Benefit's
 
 #### Challenges
