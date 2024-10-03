@@ -77,7 +77,7 @@ The algorithm goes as follows:
 
 *Analyze the computational complexity and practical efficiency compared to the Sieve of Eratosthenes.*
 
-**Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that 
+**Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that ...
 
 #### Description
 
