@@ -118,8 +118,8 @@ This algorithm relies on mathematical concepts such as "Strong probable primes" 
 
 "For a given odd integer $n > 2$, we can write $n - 1$ as $2^sd$ where $s$ is a positive integer and $d$ is an odd positive integer. Now lets consider an integer $a$ (called a base) which is co-prime to $n$, Then $n$ is said to be a strong probable prime to base $a$ if one of these congruence relations holds:
 
-- $a^d \equiv 1 \pmod{n}$
-- $a^{2^rd} \equiv {-1} \pmod{n}$ for some $0 \leq r < s$
+  - $a^d \equiv 1 \pmod{n}$
+  - $a^{2^rd} \equiv {-1} \pmod{n}$ for some $0 \leq r < s$
 
 If neither of these congruence relations hold, then $n$ is composite and $a$ is considered a **witness** to the compositeness of $n$" ("Miller-Rabin primality test," n.d.)
 
