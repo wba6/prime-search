@@ -148,14 +148,18 @@
   },
   "active": "78a965dd0a74c856",
   "lastOpenFiles": [
-    "pdf/Deep-Dive.pdf",
-    "scripts/fix_markdown.sh",
-    "scripts",
+    "code/target/release/deps/prime_finder.pdb",
+    "code/target/release/deps/prime_finder.exe",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.01.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.07.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.02.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.09.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.05.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.06.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.03.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.08.rcgu.o",
+    "code/target/release/deps/prime_finder.prime_finder.8eea227bbaf6e6d5-cgu.04.rcgu.o",
     "Deep-Dive.md",
-    "README.md",
-    "fix_markdown.sh",
-    "New folder",
-    "New Text Document.txt",
-    "pdf"
+    "README.md"
   ]
 }
