@@ -88,6 +88,7 @@ The algorithm goes as follows:
 The Sieve of Atkin algorithm is a spin off of the Sieve of Eratosthenes but contains a few changes. The main change is that the Sieve of Atkin algorithm does work beforehand to remove non-prime numbers and then proceeds by marking off **squares** of primes.
 
 The algorithm goes as follows:
+
 1. Create a results list to store all primes, start with 2, 3, 5 initially in this list.
 2. Create a sieve list containing all positive integers up to specified limit, start by marking them all non-prime.
 3. For each number in this list, we are concerned with the remainder r when divided by 60
