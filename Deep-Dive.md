@@ -66,7 +66,7 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime.
 
-**P** : Indicates the number is currently considered **prime**. 
+**P** : Indicates the number is currently considered **prime**.
 **C** : Indicates the number has been marked as **not prime** (composite).
 
 | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
