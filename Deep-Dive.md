@@ -55,6 +55,22 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 *Analyze the computational complexity of the Sieve of Eratosthenes, including time and space requirements. Discuss its practical performance and any optimizations that have been developed.*
 
+#### Pattern
+
+1. **Initialization**: Create a list of consecutive integers from 2 through n.
+2. **Marking Non-Primes**: Starting with the first prime number $p=2$ , mark all multiples of $p (i.e., 2p,3p,4p,…)$  as non-prime.
+3. **Iteration**: Move to the next unmarked number in the list, which is the next prime, and repeat the marking process.
+4. **Termination**: Continue until $p^2 >n$ . All remaining unmarked numbers are primes.
+
+#### Time Complexity
+
+
+#### Benefit's
+
+
+#### Challenges
+
+
 ## Other Prime-Finding Algorithms
 
 ### Trial Division
