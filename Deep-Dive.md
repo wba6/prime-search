@@ -66,11 +66,11 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 The Trial Division algorithm is typically the easiest to understand prime number algorithm. This algorithm aims to determine if a number can be factored compared to how the Sieve of Eratosthenes works by eliminating multiples of primes. There is a strategic strategy to determine the possible factors of a number. The possible factors of a number turn out being all numbers less than the square root of said number
 
 The algorithm goes as follows:
-  - Take in a positive integer n
-  - Determine the range of numbers you need to check as possible factors
-  - Iterate through the range of possible factors
-  - If the factor divides evenly into the number, then it is composite
-  - If all possible factors do not divide evenly into the number, then it is prime.
+  1. Take in a positive integer n
+  2. Determine the range of numbers you need to check as possible factors
+  3. Iterate through the range of possible factors
+  4. If the factor divides evenly into the number, then it is composite
+  5. If all possible factors do not divide evenly into the number, then it is prime.
 
 #### Efficiency
 
@@ -78,9 +78,26 @@ The algorithm goes as follows:
 
 **Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that ...
 
+### Sieve of Atkin
 #### Description
 
 *Detail the Sieve of Atkin algorithm, highlighting its innovative approach to prime number generation.*
+
+The Sieve of Atkin algorithm is a spin off of the Sieve of Eratosthenes but contains a few changes. The main change is that the Sieve of Atkin algorithm does work beforehand to remove non-prime numbers and then proceeds by marking off **squares** of primes.
+
+The algorithm goes as follows:
+1. Create a results list to store all primes, start with 2, 3, 5 initially in this list.
+2. Create a sieve list containing all positive integers up to specified limit, start by marking them all non-prime.
+3. For each number in this list, we are concerned with the remainder r when divided by 60
+	1. "If r is 1, 13, 17, 29, 37, 41, 49, or 53, flip the entry for each possible solution to $4x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
+	2. "If r is 7, 19, 31, or 43, flip the entry for each possible solution to $3x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
+	3. "If r is 11, 23, 47, or 59, flip the entry for each possible solution to $3x^2 − y^2 = n$ when $x > y$." ("Sieve of Atkin," n.d.)
+	4. If r is not one of those, ignore it.
+4. Start with low number in sieve list.
+5. Find the next number still marked prime.
+6. Add this number to results list.
+7. Now, square this number and mark all multiples of this square as composite.
+8. Repeat steps 4-7 until the end of the sieve list is reached.
 
 #### Efficiency
 
@@ -92,6 +109,19 @@ The algorithm goes as follows:
 
 *Describe the Miller-Rabin Primality Test method for finding primes, including its simplicity and implementation.*
 
+The Miller-Rabin Primality Test is a probabilistic primality test. This means that this algorithm determines whether a number is likely prime but does not determine for certain. Gary Miller discovered a deterministic version of this test; however, this relies on a big problem in math being true called the extended Riemann hypothesis. Michael Rabin modified Millers version to make it probabilistic, and thus not dependent on an unproven problem.
+
+This algorithm relies on mathematical concepts such as "Strong probable primes" and "Choice of bases".
+###### Strong probable primes
+"For a given odd integer $n > 2$, we can write $n - 1$ as $2^sd$ where $s$ is a positive integer and $d$ is an odd positive integer. Now lets consider an integer $a$ (called a base) which is co-prime to $n$, Then $n$ is said to be a strong probable prime to base $a$ if one of these congruence relations holds:
+- $a^d \equiv 1 \pmod{n}$
+- $a^{2^rd} \equiv -1 \pmod{n}$ for some $0 \leq r < s$
+
+If neither of these congruence relations hold, then $n$ is composite and $a$ is considered a **witness** to the compositeness of $n$" ("Miller-Rabin primality test," n.d.)
+
+###### Choices of bases
+Picking a base $a$ at random will yield a fast probabilistic test. Most bases $a$ will be a witness to $n$ being composite and thus will reduce odds of a false positive to a very small rate. 
+The typical interval for choosing a base is $1 < a < n - 1$ 
 #### Efficiency
 
 *Discuss the limitations in terms of efficiency, especially for large numbers, and compare it to sieve-based methods.*
@@ -108,4 +138,7 @@ The algorithm goes as follows:
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
 https://medium.com/geekculture/sieve-of-eratosthenes-one-of-the-oldest-algorithms-still-prevalent-as-if-it-were-born-yesterday-c3e854df5dc6 - provides a few optimizations for the sieve of Eratosthenes
+
+https://en.wikipedia.org/wiki/Sieve_of_Atkin
+https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
 
