@@ -12,7 +12,6 @@ header-includes:
   - \allsectionsfont{\centering}
   - \usepackage{fancyhdr}
   - \usepackage{anyfontsize}
-  - \setmainfont{Times New Roman}
   - \usepackage{setspace}
   - |
     \makeatletter
@@ -137,7 +136,8 @@ The typical interval for choosing a base is $1 < a < n - 1$
 
 *Compare and contrast the Sieve of Eratosthenes with the Sieve of Sundaram, Sieve of Atkin, and Trial Division in terms of efficiency, scalability, and practicality. Include tables or charts if necessary.*
 
-Results from current program run:
+#### Results from current program run:
+
   Trial Division | Largest Prime: 1188567577 | Elapsed: 12000.00s | Elapsed: 03:20:01
   Sieve of Eratosthenes | Largest Prime: 1188671413 | Elapsed: 12000.00s | Elapsed: 03:20:01
   Sieve of Atkin | Largest Prime: 1215682201 | Elapsed: 12000.00s | Elapsed: 03:20:01
