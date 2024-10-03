@@ -64,7 +64,6 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 #### Example of the Sieve of Eratosthenes
 
-
 Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime.
 
 **P** : Indicates the number is currently considered **prime**.
