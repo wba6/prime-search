@@ -122,6 +122,8 @@ The sieve of Eratosthenes is good for generating very large prime numbers due to
 
 #### Challenges
 
+While the Sieve of Eratosthenes is highly efficient and simple for generating all prime numbers up to a moderate limit, it faces significant challenges when dealing with very large numbers or specific primality testing requirements. In such cases, alternative algorithms may offer better performance and scalability based on the specific needs of the application. It is designed to generate all primes within a specified range rather than efficiently verifying the primality of a single very large number. Additionally, the sieve operates with a fixed upper limit, meaning that the range of numbers to be sieved must be known in advance. If primes beyond this initial range are needed, the sieve must be rerun with a higher $n$, which can be inefficient and time-consuming.
+
 #### Real world usage
 
 ## Other Prime-Finding Algorithms
