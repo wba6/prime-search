@@ -76,7 +76,7 @@ Step 1: Mark Multiples of 2 The first prime number is 2. Mark all multiples of 2
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | ✓   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   | ✓   | ✗   |
 
-**Marked Multiples of 2:** 4, 6, 8, 10, 12, 14, 16 
+**Marked Multiples of 2:** 4, 6, 8, 10, 12, 14, 16
 
 Step 2: Mark Multiples of 3 The next unmarked number is 3, which is prime. Mark all multiples of 3 (except 3 itself) as **not prime**.
 
