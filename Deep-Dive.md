@@ -79,6 +79,7 @@ The algorithm goes as follows:
 **Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that ...
 
 ### Sieve of Atkin
+
 #### Description
 
 *Detail the Sieve of Atkin algorithm, highlighting its innovative approach to prime number generation.*
@@ -112,16 +113,21 @@ The algorithm goes as follows:
 The Miller-Rabin Primality Test is a probabilistic primality test. This means that this algorithm determines whether a number is likely prime but does not determine for certain. Gary Miller discovered a deterministic version of this test; however, this relies on a big problem in math being true called the extended Riemann hypothesis. Michael Rabin modified Millers version to make it probabilistic, and thus not dependent on an unproven problem.
 
 This algorithm relies on mathematical concepts such as "Strong probable primes" and "Choice of bases".
+
 ###### Strong probable primes
+
 "For a given odd integer $n > 2$, we can write $n - 1$ as $2^sd$ where $s$ is a positive integer and $d$ is an odd positive integer. Now lets consider an integer $a$ (called a base) which is co-prime to $n$, Then $n$ is said to be a strong probable prime to base $a$ if one of these congruence relations holds:
+
 - $a^d \equiv 1 \pmod{n}$
 - $a^{2^rd} \equiv {-1} \pmod{n}$ for some $0 \leq r < s$
 
 If neither of these congruence relations hold, then $n$ is composite and $a$ is considered a **witness** to the compositeness of $n$" ("Miller-Rabin primality test," n.d.)
 
 ###### Choices of bases
-Picking a base $a$ at random will yield a fast probabilistic test. Most bases $a$ will be a witness to $n$ being composite and thus will reduce odds of a false positive to a very small rate. 
-The typical interval for choosing a base is $1 < a < n - 1$ 
+
+Picking a base $a$ at random will yield a fast probabilistic test. Most bases $a$ will be a witness to $n$ being composite and thus will reduce odds of a false positive to a very small rate.
+The typical interval for choosing a base is $1 < a < n - 1$
+
 #### Efficiency
 
 *Discuss the limitations in terms of efficiency, especially for large numbers, and compare it to sieve-based methods.*

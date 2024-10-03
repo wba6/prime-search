@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Deep-Dive.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Deep-Dive.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Deep-Dive.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Deep-Dive.md"
               }
             }
           }
@@ -148,9 +148,9 @@
   },
   "active": "78a965dd0a74c856",
   "lastOpenFiles": [
+    "pdf/Deep-Dive.pdf",
     "Deep-Dive.md",
     "README.md",
-    "pdf/Deep-Dive.pdf",
     "code/Cargo.lock",
     "code/prime_comparison_optimized.png",
     "code/miller_rabin.csv~",
