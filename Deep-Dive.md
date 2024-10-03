@@ -64,7 +64,6 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 #### Example of the Sieve of Eratosthenes
 
-
 Start by listing all numbers from 2 to 16. Initially, assume all numbers are prime.
 
 **P** : Indicates the number is currently considered **prime**.
@@ -112,7 +111,6 @@ The total time spent marking multiples is:
 ::: center
 $\sum_{p \leq \sqrt{n}} \frac{n}{p}$
 :::
-
 
 The sum of the reciprocals of the primes up to $\sqrt{n}$ is approximately $n\log \log n$. Therefore, the overall time complexity is:
 
