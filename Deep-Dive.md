@@ -7,6 +7,11 @@ geometry:
   - right=1in
 fontsize: 4pt
 documentclass: article
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
 header-includes:
   - \usepackage{sectsty}
   - \allsectionsfont{\centering}
@@ -27,9 +32,6 @@ header-includes:
       \belowdisplayskip 8pt
     }
     \makeatother
-  - |
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 ---
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
