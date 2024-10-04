@@ -72,9 +72,9 @@ Step 1: Mark Multiples of 2 The first prime number is 2. Mark all multiples of 2
 
 Step 2: Mark Multiples of 3 The next unmarked number is 3, which is prime. Mark all multiples of 3 (except 3 itself) as **not prime**.
 
-| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |     |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |     |
+| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |
 
 **Marked Multiples of 3:** 6, 9, 12, 15
 
@@ -82,9 +82,9 @@ Termination The next unmarked number is $5$. Since $5^2 = 25 > 16$, we can stop 
 
 Final List of Primes:
 
-| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |     |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |     |
+| 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| P   | P   | C   | P   | C   | P   | C   | C   | C   | P   | C   | P   | C   | C   | C   |
 
 **Primes up to 16:** 2, 3, 5, 7, 11, 13
 
