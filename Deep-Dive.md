@@ -205,11 +205,11 @@ Note tests where run a Ryzen 7 5800x with 32 GB of memory
 
 ## Conclusion
 
-**KEY FINDINGS**
+The analysis of these prime-finding algorithms highlight differences in time complexity and scalability. The Trial Division algorithm has a time complexity of $O(\sqrt{n})$, which indicates it is efficient for small numbers but will progressively start to struggle with larger numbers. In contrast, the Sieve of Eratosthenes has a time complexity of $O(n \log \log n)$ and performs near-linearly while outperforming the Trial Division algorithm. A downside for the sieve is that can become memory intensive for very large ranges. Alternatively, the Miller-Rabin Primality Test has a time complexity of $O(k \cdot \log^3 n)$ where $k$ is the number of testing rounds. Being a probabilistic test allows it to handle large individual primes well.
 
-The Sieve of Eratosthenes remains one of the most efficient algorithms for finding **all** the prime numbers up to a specified limit. This directly relates to the algorithms simplicity and ability to generate primes for large limits while maintaining a relatively small computational complexity. Due to the efficiency of this algorithm, this makes it a preferred choice for prime number generation.
+The Sieve of Eratosthenes remains one of the most efficient algorithms for finding all the prime numbers up to a specified limit. This directly relates to the algorithms simplicity and ability to generate primes for large limits while maintaining a relatively small computational complexity. Due to the efficiency of this algorithm, this makes it a preferred choice for prime number generation.
 
-While the Sieve of Eratosthenes is one of the most efficient algorithms for finding primes, it can be seen that the Sieve is most efficient when computing a large set of primes. In turn, when a smaller set of primes needs to be calculated or checking single numbers for primality, other algorithms such as the Miller-Rabin probabilistic test or the Trial Division algorithm.
+While the Sieve of Eratosthenes is one of the most efficient algorithms for finding primes, it can be seen that the Sieve is most efficient when computing a large set of primes. In turn, when a smaller set of primes needs to be calculated or checking smaller single numbers for primality, other algorithms such as the Miller-Rabin probabilistic test or the Trial Division algorithm shine in these cases.
 
 Future research could explore possible optimizations to the sieve, such as using parallel computing to help increase efficiency. Additionally, exploring an algorithm that combines different prime-finding algorithms based on size and scale of the problem. Prime numbers are important in cryptography; studying prime generation in cryptography (and other related fields) could help promote new algorithms.
 
