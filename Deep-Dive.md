@@ -215,8 +215,6 @@ Future research could explore possible optimizations to the sieve, such as using
 
 ## References
 
-*List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
-
   - https://en.wikipedia.org/wiki/Sieve_of_Atkin
   - https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
 
