@@ -182,15 +182,15 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
   - **Trial Division** exhibits a time complexity of $O(\sqrt{n})$, making it inefficient for large numbers. As seen in the results below, it struggled to identify larger primes within the given timeframe. However it has the benefit of being potentially very fast for smaller primes.
 
-  - **Sieve of Eratosthenes** operates with a time complexity of $O(n \log \log n)$, offering a near-linear performance for finding all primes up to a specified limit. It often outperforms Trial Division in both speed and the size of primes found. 
+  - **Sieve of Eratosthenes** operates with a time complexity of $O(n \log \log n)$, offering a near-linear performance for finding all primes up to a specified limit. It often outperforms Trial Division in both speed and the size of primes found.
 
   - **Miller-Rabin Primality Test** has a time complexity of $O(k \cdot \log^3 n)$, where $k$ is the number of testing rounds. Its probabilistic nature allows it to handle large numbers, making it highly effective for primality of large numbers.
 
 #### Scalability 
 
-  - **Trial Division** scales very poorly. As input sizes increase, the time required grows rapidly, limiting its practicality to small primes. 
+  - **Trial Division** scales very poorly. As input sizes increase, the time required grows rapidly, limiting its practicality to small primes.
 
-  - **Sieve of Eratosthenes** scales well for generating all primes up to large $n$, but its memory requirements can become a bottleneck for extremely large ranges when run on a computer. 
+  - **Sieve of Eratosthenes** scales well for generating all primes up to large $n$, but its memory requirements can become a bottleneck for extremely large ranges when run on a computer.
 
   - **Miller-Rabin** scales very well and is good for testing the primality testing of individual large numbers. This makes it ideal for applications like cryptography where verifying the primality of large integers is important.
 
