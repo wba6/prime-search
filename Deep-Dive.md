@@ -33,8 +33,6 @@ header-includes:
 
 ## History of the Sieve of Eratosthenes
 
-*Discuss the origins of the Sieve of Eratosthenes, its historical significance, and its foundational role in the study of prime numbers.*
-
 One of the most popular prime number algorithms is the Sieve of Eratosthenes. This algorithm was founded by a famous Greek scientist named Eratosthenes of Cyrene. Eratosthenes had many talents, one of which was in mathematics. Mathematics during his life was nothing compared to modern-day mathematics; thus, it was easier to become talented at mathematics.
 
 Eratosthenes discovered a systematic way to find primes. This system involved starting with a prime and then marking all multiples of that prime as composite. The numbers that do not get crossed off end up being the primes.
@@ -136,7 +134,8 @@ The algorithm goes as follows:
 
 #### Efficiency
 
- #### Time Complexity
+
+**Time Complexity**
 
  - **Best Case**: The best-case scenario occurs when the number being tested, $n$, is divisible by small primes like 2 or 3. In this case, the algorithm can quickly conclude that $n$ is composite after a few iterations. This results in a time complexity of $O(1)$, as the algorithm can terminate very early.
 
