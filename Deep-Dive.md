@@ -106,11 +106,11 @@ This is nearly linear, making the sieve exceptionally efficient for large values
 
 The sieve of Eratosthenes is good for generating very large prime numbers due to its time complexity of $O(n \log \log n)$. The sieve is also very easy to understand and implement by hand or through algorithms on a computer. The sieve also provides a deterministic way to identify all primes up to $n$, ensuring that all primes can easily be identified and won't be missed. Unlike probabilistic algorithms, the sieve doesn't rely on chance, offering guaranteed results.
 
-#### Challenges
+#### Challenges:
 
 While the Sieve of Eratosthenes is very efficient for generating all prime numbers up to a limit, it faces significant challenges when dealing with very large numbers or specific primality testing requirements. In such cases, alternative algorithms will likely offer better performance and scalability based on the specific needs of the application. It is designed to generate all primes within a specified range rather than verifying the primality of a single very large number. Additionally, the sieve operates with a fixed upper limit, meaning that the range of numbers to be sieved must be known in advance. If primes beyond this initial range are needed, the sieve must be rerun with a higher $n$, which can be inefficient and time-consuming.
 
-#### Real world usage
+#### Real world usage:
 
 The Sieve of Eratosthenes has been instrumental in generating large lists of prime numbers quickly. Which are often essential for mathematical research and educational purposes. In the field of cryptography, it aids in the creation of large prime numbers that are needed for creating secure keys in systems like RSA encryption. The sieve also helps with prime factorization in computational mathematics by providing a list of primes up to a certain limit, which can be used to break down integers into their prime factors. Additionally, it is a staple in competitive programming where quick prime generation is often required. Researchers utilize the sieve to study the distribution of primes and to test ideas related to prime numbers, such as the Goldbach and Twin Prime conjectures. 
 
@@ -118,7 +118,7 @@ The Sieve of Eratosthenes has been instrumental in generating large lists of pri
 
 ### Trial Division
 
-#### Description
+#### Description:
 
 The Trial Division algorithm is typically the easiest to understand prime number algorithm. This algorithm aims to determine if a number can be factored compared to how the Sieve of Eratosthenes works by eliminating multiples of primes. There is a strategic strategy to determine the possible factors of a number. The possible factors of a number turn out being all numbers less than the square root of said number
 
@@ -130,7 +130,7 @@ The algorithm goes as follows:
   5. If the factor divides evenly into the number, then it is composite
   6. If all possible factors do not divide evenly into the number, then it is prime.
 
-#### Efficiency
+#### Efficiency:
 
 **Time Complexity**
 
@@ -144,13 +144,13 @@ Trial Division algorithm is efficient in determining if single numbers are prime
 
 ### Miller-Rabin Primality Test
 
-#### Description
+#### Description:
 
 The Miller-Rabin Primality Test is a probabilistic primality test. This means that this algorithm determines whether a number is likely prime but does not determine for certain. Gary Miller discovered a deterministic version of this test; however, this relies on a big problem in math being true called the extended Riemann hypothesis. Michael Rabin modified Millers version to make it probabilistic, and thus not dependent on an unproven problem.
 
 This algorithm relies on mathematical concepts such as "Strong probable primes" and "Choice of bases".
 
-**Strong probable primes**
+**Strong probable primes**:
 
 "For a given odd integer $n > 2$, we can write $n - 1$ as $2^sd$ where $s$ is a positive integer and $d$ is an odd positive integer. Now lets consider an integer $a$ (called a base) which is co-prime to $n$, Then $n$ is said to be a strong probable prime to base $a$ if one of these congruence relations holds:
 
@@ -159,12 +159,12 @@ This algorithm relies on mathematical concepts such as "Strong probable primes" 
 
 If neither of these congruence relations hold, then $n$ is composite and $a$ is considered a **witness** to the compositeness of $n$" ("Miller-Rabin primality test," n.d.)
 
-**Choices of bases**
+**Choices of bases**:
 
 Picking a base $a$ at random will yield a fast probabilistic test. Most bases $a$ will be a witness to $n$ being composite and thus will reduce odds of a false positive to a very small rate.
 The typical interval for choosing a base is $1 < a < n - 1$
 
-#### Efficiency
+#### Efficiency:
 
 The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it can determine whether a number is probably prime or composite with a high degree of confidence. Its performance depends on multiple factors, including the size of the number being tested and the number of rounds of the test that are performed.
 
