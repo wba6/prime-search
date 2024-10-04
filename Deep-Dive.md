@@ -166,9 +166,9 @@ The typical interval for choosing a base is $1 < a < n - 1$
 
 #### Efficiency
 
-The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it can determine whether a number is "probably prime" or composite with a high degree of confidence. Its performance depends on several factors, including the size of the number being tested and the number of rounds of the test that are performed. 
+The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it can determine whether a number is "probably prime" or composite with a high degree of confidence. Its performance depends on several factors, including the size of the number being tested and the number of rounds of the test that are performed.
 
-  - **Time Complexity**: The Miller-Rabin test has a time complexity of  $O(k \cdot \log^3 n)$, where $n$ is the number being tested for primality, and $k$ is the number of rounds or random bases tested. 
+  - **Time Complexity**: The Miller-Rabin test has a time complexity of  $O(k \cdot \log^3 n)$, where $n$ is the number being tested for primality, and $k$ is the number of rounds or random bases tested.
 
   - **Performance for Large Numbers**: One of the biggest advantages of the Miller-Rabin test is its efficiency for very large numbers. It is significantly faster than the deterministic algorithms, such as Trial Division or the Sieve of Eratosthenes, for primality testing of large integers. The test can be run multiple times to decrease the probability of false positives (incorrectly identifying a composite number as prime), making it a flexible choice for large-scale prime verification tasks.
 
@@ -180,19 +180,21 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
 #### Time Complexity 
 
-- **Trial Division** exhibits a time complexity of $O(\sqrt{n})$, making it inefficient for large numbers. As seen in the results below, it struggled to identify larger primes within the given timeframe. However it has the benefit of being potentially very fast for smaller primes.
+  - **Trial Division** exhibits a time complexity of $O(\sqrt{n})$, making it inefficient for large numbers. As seen in the results below, it struggled to identify larger primes within the given timeframe. However it has the benefit of being potentially very fast for smaller primes.
 
-- **Sieve of Eratosthenes** operates with a time complexity of $O(n \log \log n)$, offering a near-linear performance for finding all primes up to a specified limit. It often outperforms Trial Division in both speed and the size of primes found. 
+  - **Sieve of Eratosthenes** operates with a time complexity of $O(n \log \log n)$, offering a near-linear performance for finding all primes up to a specified limit. It often outperforms Trial Division in both speed and the size of primes found. 
 
-- **Miller-Rabin Primality Test** has a time complexity of $O(k \cdot \log^3 n)$, where $k$ is the number of testing rounds. Its probabilistic nature allows it to handle large numbers, making it highly effective for primality of large numbers.
+  - **Miller-Rabin Primality Test** has a time complexity of $O(k \cdot \log^3 n)$, where $k$ is the number of testing rounds. Its probabilistic nature allows it to handle large numbers, making it highly effective for primality of large numbers.
+
 #### Scalability 
-- **Trial Division** scales very poorly. As input sizes increase, the time required grows rapidly, limiting its practicality to small primes. 
 
-- **Sieve of Eratosthenes** scales well for generating all primes up to large $n$, but its memory requirements can become a bottleneck for extremely large ranges when run on a computer. 
+  - **Trial Division** scales very poorly. As input sizes increase, the time required grows rapidly, limiting its practicality to small primes. 
 
-- **Miller-Rabin** scales very well and is good for testing the primality testing of individual large numbers. This makes it ideal for applications like cryptography where verifying the primality of large integers is important.
+  - **Sieve of Eratosthenes** scales well for generating all primes up to large $n$, but its memory requirements can become a bottleneck for extremely large ranges when run on a computer. 
 
-Some of these results can be seen from these algorithms being run together, however, there is room for error due to the CPU cycles that is dedicated to each algorithm likely differing based on processor load at the time of execution. 
+  - **Miller-Rabin** scales very well and is good for testing the primality testing of individual large numbers. This makes it ideal for applications like cryptography where verifying the primality of large integers is important.
+
+Some of these results can be seen from these algorithms being run together, however, there is room for error due to the CPU cycles that is dedicated to each algorithm likely differing based on processor load at the time of execution.
 
 | **Algorithm**         | **Largest Prime** | **Elapsed (s)** | **Elapsed (HH:MM:SS)** |
 | --------------------- | ----------------- | --------------- | ---------------------- |
