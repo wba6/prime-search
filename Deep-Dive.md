@@ -203,8 +203,6 @@ Note tests where run a Ryzen 7 5800x with 32 GB of memory
 
 ## Conclusion
 
-*Summarize the key findings of the paper, reiterate the efficiency of the Sieve of Eratosthenes, discuss the circumstances under which other algorithms may be more effective, and suggest potential areas for future research.*
-
 **KEY FINDINGS**
 
 The Sieve of Eratosthenes remains one of the most efficient algorithms for finding **all** the prime numbers up to a specified limit. This directly relates to the algorithms simplicity and ability to generate primes for large limits while maintaining a relatively small computational complexity. Due to the efficiency of this algorithm, this makes it a preferred choice for prime number generation.
