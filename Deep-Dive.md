@@ -142,32 +142,6 @@ The algorithm goes as follows:
  - **Average Case**: On average, the algorithm will perform better than the worst case because it will typically find factors before reaching \( \sqrt{n} \). However, the average-case time complexity remains $O(\sqrt{n})$ because it still depends on the size of the input number.
 
 Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that with larger numbers it can take increasing amounts of time.
-
-### Sieve of Atkin
-
-#### Description
-
-The Sieve of Atkin algorithm is a spin off of the Sieve of Eratosthenes but contains a few changes. The main change is that the Sieve of Atkin algorithm does work beforehand to remove non-prime numbers and then proceeds by marking off **squares** of primes.
-
-The algorithm goes as follows:
-
-1. Create a results list to store all primes, start with 2, 3, 5 initially in this list.
-2. Create a sieve list containing all positive integers up to specified limit, start by marking them all non-prime.
-3. For each number in this list, we are concerned with the remainder r when divided by 60
-	1. "If r is 1, 13, 17, 29, 37, 41, 49, or 53, flip the entry for each possible solution to $4x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
-	2. "If r is 7, 19, 31, or 43, flip the entry for each possible solution to $3x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
-	3. "If r is 11, 23, 47, or 59, flip the entry for each possible solution to $3x^2 − y^2 = n$ when $x > y$." ("Sieve of Atkin," n.d.)
-	4. If r is not one of those, ignore it.
-4. Start with low number in sieve list.
-5. Find the next number still marked prime.
-6. Add this number to results list.
-7. Now, square this number and mark all multiples of this square as composite.
-8. Repeat steps 4-7 until the end of the sieve list is reached.
-
-#### Efficiency
-
-*Evaluate its performance metrics and compare its efficiency with other sieves.*
-
 ### Miller-Rabin Primality Test
 
 #### Description
