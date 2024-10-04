@@ -192,7 +192,7 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
 - **Sieve of Eratosthenes** scales well for generating all primes up to large $n$, but its memory requirements can become a bottleneck for extremely large ranges when run on a computer. 
 
-- **Miller-Rabin** scales very well and is good for testing the primality testing of individual large numbers, making it ideal for applications like cryptography where verifying the primality of large integers is essential.
+- **Miller-Rabin** scales very well and is good for testing the primality testing of individual large numbers. This makes it ideal for applications like cryptography where verifying the primality of large integers is important.
 
 Some of these results can be seen from these algorithms being run together, however, there is room for error due to the CPU cycles that is dedicated to each algorithm likely differing based on processor load at the time of execution. 
 
