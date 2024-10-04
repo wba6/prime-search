@@ -201,6 +201,6 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
 
-- https://en.wikipedia.org/wiki/Sieve_of_Atkin 
-- https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
+  - https://en.wikipedia.org/wiki/Sieve_of_Atkin 
+  - https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
 
