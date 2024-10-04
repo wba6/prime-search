@@ -31,16 +31,6 @@ header-includes:
 
 # Efficiency of the Sieve of Eratosthenes and Comparative Analysis of Prime-Finding Algorithms
 
-## Abstract
-
-*Provide a brief summary of the paper, including the main objectives, methods, key findings, and conclusions.*
-
-## Introduction
-
-*Introduce the topic of prime number algorithms, the importance of efficiency in computational number theory, and an overview of what the paper will cover.*
-
-Example equ: The quadratic formula is given by $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
-
 ## History of the Sieve of Eratosthenes
 
 *Discuss the origins of the Sieve of Eratosthenes, its historical significance, and its foundational role in the study of prime numbers.*
@@ -134,8 +124,6 @@ The Sieve of Eratosthenes has been instrumental in generating comprehensive list
 
 #### Description
 
-*Explain how the Trial Division algorithm works and its methodology for finding prime numbers.*
-
 The Trial Division algorithm is typically the easiest to understand prime number algorithm. This algorithm aims to determine if a number can be factored compared to how the Sieve of Eratosthenes works by eliminating multiples of primes. There is a strategic strategy to determine the possible factors of a number. The possible factors of a number turn out being all numbers less than the square root of said number
 
 The algorithm goes as follows:
@@ -155,8 +143,6 @@ The algorithm goes as follows:
 ### Sieve of Atkin
 
 #### Description
-
-*Detail the Sieve of Atkin algorithm, highlighting its innovative approach to prime number generation.*
 
 The Sieve of Atkin algorithm is a spin off of the Sieve of Eratosthenes but contains a few changes. The main change is that the Sieve of Atkin algorithm does work beforehand to remove non-prime numbers and then proceeds by marking off **squares** of primes.
 
@@ -182,8 +168,6 @@ The algorithm goes as follows:
 ### Miller-Rabin Primality Test
 
 #### Description
-
-*Describe the Miller-Rabin Primality Test method for finding primes, including its simplicity and implementation.*
 
 The Miller-Rabin Primality Test is a probabilistic primality test. This means that this algorithm determines whether a number is likely prime but does not determine for certain. Gary Miller discovered a deterministic version of this test; however, this relies on a big problem in math being true called the extended Riemann hypothesis. Michael Rabin modified Millers version to make it probabilistic, and thus not dependent on an unproven problem.
 
@@ -227,8 +211,7 @@ The typical interval for choosing a base is $1 < a < n - 1$
 ## References
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
-https://medium.com/geekculture/sieve-of-eratosthenes-one-of-the-oldest-algorithms-still-prevalent-as-if-it-were-born-yesterday-c3e854df5dc6 - provides a few optimizations for the sieve of Eratosthenes
 
-https://en.wikipedia.org/wiki/Sieve_of_Atkin
+https://en.wikipedia.org/wiki/Sieve_of_Atkin <br> 
 https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
 
