@@ -134,7 +134,6 @@ The algorithm goes as follows:
 
 #### Efficiency
 
-
 **Time Complexity**
 
  - **Best Case**: The best-case scenario occurs when the number being tested, $n$, is divisible by small primes like 2 or 3. In this case, the algorithm can quickly conclude that $n$ is composite after a few iterations. This results in a time complexity of $O(1)$, as the algorithm can terminate very early.
@@ -200,6 +199,6 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
 *List all the sources cited in the paper in the appropriate citation style.* Undetermined what style yet for citations
 
-  - https://en.wikipedia.org/wiki/Sieve_of_Atkin 
+  - https://en.wikipedia.org/wiki/Sieve_of_Atkin
   - https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test#
 
