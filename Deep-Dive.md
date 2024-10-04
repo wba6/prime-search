@@ -43,8 +43,6 @@ The Sieve of Eratosthenes has played a significant role in finding "small" prime
 
 ## Efficiency of the Sieve of Eratosthenes
 
-*Analyze the computational complexity of the Sieve of Eratosthenes, including time and space requirements. Discuss its practical performance and any optimizations that have been developed.*
-
 #### Pattern
 
 1. **Initialization**: Create a list of consecutive integers from 2 through n.
@@ -144,7 +142,7 @@ The algorithm goes as follows:
 
  - **Average Case**: On average, the algorithm will perform better than the worst case because it will typically find factors before reaching $\sqrt{n}$. However, the average-case time complexity remains $O(\sqrt{n})$ because it still depends on the size of the input number.
 
-Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that with larger numbers it can take increasing amounts of time.
+Trial Division algorithm is efficient in determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that with larger numbers it can take increasing amounts of time.
 
 ### Miller-Rabin Primality Test
 
@@ -186,16 +184,23 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
 #### Results from current program run:
 
-| **Algorithm**          | **Largest Prime** | **Elapsed (s)** | **Elapsed (HH:MM:SS)** |
-|------------------------|--------------------|-----------------|------------------------|
-| Trial Division         | 1,188,567,577      | 12,000.00s      | 03:20:00               |
-| Sieve of Eratosthenes   | 1,188,671,413      | 12,000.00s      | 03:20:00               |
-| Sieve of Atkin         | 1,215,682,201      | 12,000.00s      | 03:20:00               |
-| Miller-Rabin           | 1,188,766,571      | 12,000.00s      | 03:20:00               |
+| **Algorithm**         | **Largest Prime** | **Elapsed (s)** | **Elapsed (HH:MM:SS)** |
+| --------------------- | ----------------- | --------------- | ---------------------- |
+| Trial Division        | 1,188,567,577     | 12,000.00s      | 03:20:00               |
+| Sieve of Eratosthenes | 1,188,671,413     | 12,000.00s      | 03:20:00               |
+| Miller-Rabin          | 1,188,766,571     | 12,000.00s      | 03:20:00               |
 
 ## Conclusion
 
 *Summarize the key findings of the paper, reiterate the efficiency of the Sieve of Eratosthenes, discuss the circumstances under which other algorithms may be more effective, and suggest potential areas for future research.*
+
+**KEY FINDINGS**
+
+The Sieve of Eratosthenes remains one of the most efficient algorithms for finding **all** the prime numbers up to a specified limit. This directly relates to the algorithms simplicity and ability to generate primes for large limits while maintaining a relatively small computational complexity. Due to the efficiency of this algorithm, this makes it a preferred choice for prime number generation.
+
+While the Sieve of Eratosthenes is one of the most efficient algorithms for finding primes, it can be seen that the Sieve is most efficient when computing a large set of primes. In turn, when a smaller set of primes needs to be calculated or checking single numbers for primality, other algorithms such as the Miller-Rabin probabilistic test or the Trial Division algorithm.
+
+Future research could explore possible optimizations to the sieve, such as using parallel computing to help increase efficiency. Additionally, exploring an algorithm that combines different prime-finding algorithms based on size and scale of the problem. Prime numbers are important in cryptography; studying prime generation in cryptography (and other related fields) could help promote new algorithms.
 
 ## References
 
