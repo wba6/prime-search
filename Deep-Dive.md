@@ -128,7 +128,7 @@ The Trial Division algorithm is typically the easiest to understand prime number
 
 The algorithm goes as follows:
 
-  1. Take in a positive integer n
+  1. Take in a positive integer $n$
   3. Determine the range of numbers you need to check as possible factors
   4. Iterate through the range of possible factors
   5. If the factor divides evenly into the number, then it is composite
@@ -136,34 +136,15 @@ The algorithm goes as follows:
 
 #### Efficiency
 
-*Analyze the computational complexity and practical efficiency compared to the Sieve of Eratosthenes.*
+ #### Time Complexity
 
-**Dont know if I should include this here or in the description:** Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that ...
+ - **Best Case**: The best-case scenario occurs when the number being tested, $n$, is divisible by small primes like 2 or 3. In this case, the algorithm can quickly conclude that $n$ is composite after a few iterations. This results in a time complexity of $O(1)$, as the algorithm can terminate very early.
 
-### Sieve of Atkin
+ - **Worst Case**: In the worst case, if $n$ is prime, the algorithm must check all potential divisors up to $\sqrt{n}$. The number of such potential divisors is proportional to $\sqrt{n}$, resulting in a time complexity of $O(\sqrt{n})$. This makes Trial Division inefficient for large numbers.
 
-#### Description
+ - **Average Case**: On average, the algorithm will perform better than the worst case because it will typically find factors before reaching $\sqrt{n}$. However, the average-case time complexity remains $O(\sqrt{n})$ because it still depends on the size of the input number.
 
-The Sieve of Atkin algorithm is a spin off of the Sieve of Eratosthenes but contains a few changes. The main change is that the Sieve of Atkin algorithm does work beforehand to remove non-prime numbers and then proceeds by marking off **squares** of primes.
-
-The algorithm goes as follows:
-
-1. Create a results list to store all primes, start with 2, 3, 5 initially in this list.
-2. Create a sieve list containing all positive integers up to specified limit, start by marking them all non-prime.
-3. For each number in this list, we are concerned with the remainder r when divided by 60
-	1. "If r is 1, 13, 17, 29, 37, 41, 49, or 53, flip the entry for each possible solution to $4x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
-	2. "If r is 7, 19, 31, or 43, flip the entry for each possible solution to $3x^2 + y^2 = n$." ("Sieve of Atkin," n.d.)
-	3. "If r is 11, 23, 47, or 59, flip the entry for each possible solution to $3x^2 − y^2 = n$ when $x > y$." ("Sieve of Atkin," n.d.)
-	4. If r is not one of those, ignore it.
-4. Start with low number in sieve list.
-5. Find the next number still marked prime.
-6. Add this number to results list.
-7. Now, square this number and mark all multiples of this square as composite.
-8. Repeat steps 4-7 until the end of the sieve list is reached.
-
-#### Efficiency
-
-*Evaluate its performance metrics and compare its efficiency with other sieves.*
+Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that with larger numbers it can take increasing amounts of time.
 
 ### Miller-Rabin Primality Test
 
@@ -189,7 +170,15 @@ The typical interval for choosing a base is $1 < a < n - 1$
 
 #### Efficiency
 
-*Discuss the limitations in terms of efficiency, especially for large numbers, and compare it to sieve-based methods.*
+The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it can determine whether a number is "probably prime" or composite with a high degree of confidence. Its performance depends on several factors, including the size of the number being tested and the number of rounds of the test that are performed. Here are some key points regarding its efficiency:
+
+  - **Time Complexity**: The Miller-Rabin test has a time complexity of  $O(k \cdot \log^3 n)$, where $n$ is the number being tested for primality, and $k$ is the number of rounds or random bases tested. Each round involves modular exponentiation, which is efficient and can be computed in $O(\log^3 n)$. The overall complexity depends on the number of iterations (bases) $k$ chosen for the test.
+
+  - **Performance for Large Numbers**: One of the biggest advantages of the Miller-Rabin test is its efficiency for very large numbers. It is significantly faster than the deterministic algorithms, such as Trial Division or the Sieve of Eratosthenes, for primality testing of large integers. The test can be run multiple times to decrease the probability of false positives (incorrectly identifying a composite number as prime), making it a flexible choice for large-scale prime verification tasks.
+
+  - **Probabilistic Nature**: Unlike deterministic tests like Trial Division, the Miller-Rabin test does not guarantee absolute certainty that a number is prime. Instead, it gives a probabilistic result that can be made arbitrarily accurate by increasing the number of rounds. For practical purposes, after sufficient rounds, the probability of incorrectly identifying a composite number as prime becomes exceedingly small, often less than $1/2^k$, where $k$ is the number of bases used.
+
+  - **Trade-offs**: While the Miller-Rabin test is very efficient and scalable for large numbers, its probabilistic nature means that it may not be suitable for applications where absolute primality is required. For example, in cryptographic settings, a false positive could have serious security implications. In such cases, the test is typically followed by additional checks or deterministic tests.
 
 ## Comparative Analysis
 
