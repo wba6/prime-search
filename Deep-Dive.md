@@ -137,8 +137,11 @@ The algorithm goes as follows:
 #### Efficiency
 
  #### Time Complexity
+ 
  - **Best Case**: The best-case scenario occurs when the number being tested, $n$, is divisible by small primes like 2 or 3. In this case, the algorithm can quickly conclude that $n$ is composite after a few iterations. This results in a time complexity of $O(1)$, as the algorithm can terminate very early.
+ 
  - **Worst Case**: In the worst case, if $n$ is prime, the algorithm must check all potential divisors up to $\sqrt{n}$. The number of such potential divisors is proportional to $\sqrt{n}$, resulting in a time complexity of $O(\sqrt{n})$. This makes Trial Division inefficient for large numbers.
+ 
  - **Average Case**: On average, the algorithm will perform better than the worst case because it will typically find factors before reaching $\sqrt{n}$. However, the average-case time complexity remains $O(\sqrt{n})$ because it still depends on the size of the input number.
 
 Trial Division algorithm is efficient is determining if single numbers are prime; however, the Sieve of Eratosthenes is efficient is finding all the primes in a specified limit. A main trade off for the Trial Division algorithm is that with larger numbers it can take increasing amounts of time.
