@@ -175,9 +175,9 @@ The Miller-Rabin Primality Test is a probabilistic algorithm, meaning that it ca
 
   - **Performance for Large Numbers**: One of the biggest advantages of the Miller-Rabin test is its efficiency for very large numbers. It is significantly faster than the deterministic algorithms, such as Trial Division or the Sieve of Eratosthenes, for primality testing of large integers. The test can be run multiple times to decrease the probability of false positives (incorrectly identifying a composite number as prime), making it a flexible choice for large-scale prime verification tasks.
 
-  - **Probabilistic Nature**: Unlike deterministic tests like Trial Division, the Miller-Rabin test does not guarantee absolute certainty that a number is prime. Instead, it gives a probabilistic result that can be made arbitrarily accurate by increasing the number of rounds. For practical purposes, after sufficient rounds, the probability of incorrectly identifying a composite number as prime becomes exceedingly small, often less than $1/2^k$, where $k$ is the number of bases used.
+  - **Probabilistic Nature**: Unlike deterministic tests like Trial Division, the Miller-Rabin test does not guarantee absolute certainty that a number is prime. Instead, it gives a probabilistic result that can be made arbitrarily accurate by increasing the number of rounds. 
 
-  - **Trade-offs**: While the Miller-Rabin test is very efficient and scalable for large numbers, its probabilistic nature means that it may not be suitable for applications where absolute primality is required. For example, in cryptographic settings, a false positive could have serious security implications. In such cases, the test is typically followed by additional checks or deterministic tests.
+  - **Trade-offs**: While the Miller-Rabin test is very efficient and scalable for large numbers, its probabilistic nature means that it may not be suitable for applications where absolute primality is required. For example, in cryptographic settings, a false positive could have serious security implications.
 
 ## Comparative Analysis
 
