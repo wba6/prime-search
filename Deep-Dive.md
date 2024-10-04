@@ -150,7 +150,7 @@ The Miller-Rabin Primality Test is a probabilistic primality test. This means th
 
 This algorithm relies on mathematical concepts such as "Strong probable primes" and "Choice of bases".
 
-###### Strong probable primes
+**Strong probable primes**
 
 "For a given odd integer $n > 2$, we can write $n - 1$ as $2^sd$ where $s$ is a positive integer and $d$ is an odd positive integer. Now lets consider an integer $a$ (called a base) which is co-prime to $n$, Then $n$ is said to be a strong probable prime to base $a$ if one of these congruence relations holds:
 
@@ -159,7 +159,7 @@ This algorithm relies on mathematical concepts such as "Strong probable primes" 
 
 If neither of these congruence relations hold, then $n$ is composite and $a$ is considered a **witness** to the compositeness of $n$" ("Miller-Rabin primality test," n.d.)
 
-###### Choices of bases
+**Choices of bases**
 
 Picking a base $a$ at random will yield a fast probabilistic test. Most bases $a$ will be a witness to $n$ being composite and thus will reduce odds of a false positive to a very small rate.
 The typical interval for choosing a base is $1 < a < n - 1$
@@ -201,7 +201,7 @@ Some of these results can be seen from these algorithms being run together, howe
 | Trial Division        | 1,188,567,577     | 12,000.00s      | 03:20:00               |
 | Sieve of Eratosthenes | 1,188,671,413     | 12,000.00s      | 03:20:00               |
 | Miller-Rabin          | 1,188,766,571     | 12,000.00s      | 03:20:00               |
-Note tests were run on a Ryzen 7 5800x with 32 GB of memory
+Note: tests were run on a Ryzen 7 5800x with 32 GB of memory
 
 ## Conclusion
 
