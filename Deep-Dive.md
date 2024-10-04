@@ -112,7 +112,7 @@ While the Sieve of Eratosthenes is very efficient for generating all prime numbe
 
 #### Real world usage:
 
-The Sieve of Eratosthenes has been instrumental in generating large lists of prime numbers quickly. Which are often essential for mathematical research and educational purposes. In the field of cryptography, it aids in the creation of large prime numbers that are needed for creating secure keys in systems like RSA encryption. The sieve also helps with prime factorization in computational mathematics by providing a list of primes up to a certain limit, which can be used to break down integers into their prime factors. Additionally, it is a staple in competitive programming where quick prime generation is often required. Researchers utilize the sieve to study the distribution of primes and to test ideas related to prime numbers, such as the Goldbach and Twin Prime conjectures. 
+The Sieve of Eratosthenes has been instrumental in generating large lists of prime numbers quickly. Which are often essential for mathematical research and educational purposes. In the field of cryptography, it aids in the creation of large prime numbers that are needed for creating secure keys in systems like RSA encryption. The sieve also helps with prime factorization in computational mathematics by providing a list of primes up to a certain limit, which can be used to break down integers into their prime factors. Additionally, it is a staple in competitive programming where quick prime generation is often required. Researchers utilize the sieve to study the distribution of primes and to test ideas related to prime numbers, such as the Goldbach and Twin Prime conjectures.
 
 ## Other Prime-Finding Algorithms
 
