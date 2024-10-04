@@ -201,7 +201,7 @@ Some of these results can be seen from these algorithms being run together, howe
 | Trial Division        | 1,188,567,577     | 12,000.00s      | 03:20:00               |
 | Sieve of Eratosthenes | 1,188,671,413     | 12,000.00s      | 03:20:00               |
 | Miller-Rabin          | 1,188,766,571     | 12,000.00s      | 03:20:00               |
-Note tests where run a Ryzen 7 5800x with 32 GB of memory
+Note tests were run on a Ryzen 7 5800x with 32 GB of memory
 
 ## Conclusion
 
