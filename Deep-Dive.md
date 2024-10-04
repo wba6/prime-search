@@ -105,7 +105,7 @@ $$O(n \log \log n)$$
 
 This is nearly linear, making the sieve exceptionally efficient for large values of n.
 
-#### Benefit's:
+#### Benefits:
 
 The sieve of Eratosthenes is good for generating very large prime numbers due to its time complexity of $O(n \log \log n)$. The sieve is also very easy to understand and implement by hand or through algorithms on a computer. The sieve also provides a deterministic way to identify all primes up to $n$, ensuring that all primes can easily be identified and won't be missed. Unlike probabilistic algorithms, the sieve doesn't rely on chance, offering guaranteed results.
 
